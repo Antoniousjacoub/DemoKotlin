@@ -1,4 +1,4 @@
-package com.linkdev.demokotlin.models
+package com.linkdev.demokotlin.models.news
 
 import android.annotation.SuppressLint
 import android.os.Parcel

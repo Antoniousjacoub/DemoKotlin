@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.linkdev.demokotlin.R
-import com.linkdev.demokotlin.models.Article
+import com.linkdev.demokotlin.models.news.Article
 import kotlinx.android.synthetic.main.item_news_feed.view.*
 
 /**

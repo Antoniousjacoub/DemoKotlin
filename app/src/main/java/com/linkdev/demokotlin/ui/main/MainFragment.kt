@@ -7,7 +7,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
 import com.linkdev.demokotlin.R
-import com.linkdev.demokotlin.models.Article
+import com.linkdev.demokotlin.models.news.Article
 import com.linkdev.demokotlin.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_main.*
 
@@ -15,10 +15,9 @@ class MainFragment : BaseFragment(), NewsFeedAdapter.OnItemNewsClicked {
 
    val TAG: String = "MainFragment"
 
-   fun newInstance(): MainFragment {
-        return MainFragment()
+    companion object Factorysds {
+        fun create(): MainFragment = MainFragment()
     }
-
     override fun onItemNewsClicked(article: Article) {
     }
 

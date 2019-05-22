@@ -3,7 +3,7 @@ package com.linkdev.demokotlin.ui.main
 import android.os.Bundle
 import android.support.v7.widget.Toolbar
 import com.linkdev.demokotlin.R
-import com.linkdev.demokotlin.models.Article
+import com.linkdev.demokotlin.models.news.Article
 import com.linkdev.demokotlin.ui.base.BaseActivity
 
 class MainActivity : BaseActivity(), NewsFeedAdapter.OnItemNewsClicked {
@@ -32,7 +32,7 @@ class MainActivity : BaseActivity(), NewsFeedAdapter.OnItemNewsClicked {
         setToolbar(toolbar, getString(R.string.news), false, false)
         addFragment(
             R.id.frmlContainer,
-            MainFragment().newInstance(),
+            MainFragment.create(),
             MainFragment().TAG
         )
     }
