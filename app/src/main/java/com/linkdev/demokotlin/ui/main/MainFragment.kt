@@ -13,11 +13,12 @@ import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment : BaseFragment(), NewsFeedAdapter.OnItemNewsClicked {
 
-   val TAG: String = "MainFragment"
+    val TAG: String = "MainFragment"
 
     companion object Factorysds {
         fun create(): MainFragment = MainFragment()
     }
+
     override fun onItemNewsClicked(article: Article) {
     }
 
@@ -34,7 +35,7 @@ class MainFragment : BaseFragment(), NewsFeedAdapter.OnItemNewsClicked {
     }
 
     override fun setObservers() {
-        newsViewModel.popularMoviesLiveData.observe(this, newOnSusscesObserver)
+        newsViewModel.newsLiveData.observe(this, newOnSusscesObserver)
     }
 
     override fun showProgress(shouldShow: Boolean) {
@@ -48,16 +49,17 @@ class MainFragment : BaseFragment(), NewsFeedAdapter.OnItemNewsClicked {
     override fun onViewReady(context: Context) {
         mContext = context
         initViewModel()
-        newsViewModel.fetchMovies()
+        newsViewModel.fetchNews()
         setObservers()
     }
 
     private fun initViewModel() {
-        newsViewModel = ViewModelProviders.of(this).get(NewsViewModel::class.java)
+        val newsViewModelFactory = NewsViewModelFactory(activity?.application)
+        newsViewModel = ViewModelProviders.of(this, newsViewModelFactory).get(NewsViewModel::class.java)
 
     }
 
-    private var newOnSusscesObserver = Observer<MutableList<Article>> {
+    private var newOnSusscesObserver = Observer<List<Article>> {
         Log.d("newOnSusscesObserver", "" + it?.size)
         rv_news_feed.layoutManager = LinearLayoutManager(mContext)
         rv_news_feed.adapter = NewsFeedAdapter(it, this)

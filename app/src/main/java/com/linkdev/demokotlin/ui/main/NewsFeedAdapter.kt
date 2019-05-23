@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.item_news_feed.view.*
  * Created by antonio on 1/16/19.
  */
 
-class NewsFeedAdapter(val mData: MutableList<Article>?, val onItemNewsClicked: OnItemNewsClicked) :
+class NewsFeedAdapter(val mData: List<Article>?, val onItemNewsClicked: OnItemNewsClicked) :
     RecyclerView.Adapter<NewsFeedAdapter.ViewHolder>() {
 
 

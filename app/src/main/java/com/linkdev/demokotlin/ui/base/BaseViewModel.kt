@@ -1,9 +1,14 @@
 package com.linkdev.demokotlin.ui.base
 
+import android.app.Application
+import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.ViewModel
 import com.linkdev.demokotlin.models.ResultResponse
 import com.linkdev.demokotlin.models.StatusCode
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.newSingleThreadContext
 import retrofit2.Response
 import kotlin.coroutines.CoroutineContext
 
@@ -15,7 +20,7 @@ open class BaseViewModel : ViewModel() {
 
     protected val scope = CoroutineScope(coroutineContext)
 
-   private fun cancelAllRequests() = coroutineContext.cancel()
+    private fun cancelAllRequests() = coroutineContext.cancel()
 
     override fun onCleared() {
         cancelAllRequests()

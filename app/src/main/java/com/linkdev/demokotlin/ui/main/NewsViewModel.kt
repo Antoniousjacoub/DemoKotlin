@@ -1,23 +1,20 @@
 package com.linkdev.demokotlin.ui.main
 
+import android.app.Application
 import android.arch.lifecycle.MutableLiveData
 import com.linkdev.demokotlin.models.news.Article
-import com.linkdev.demokotlin.retrofit.Apifactory
 import com.linkdev.demokotlin.ui.base.BaseViewModel
 import kotlinx.coroutines.launch
 
-class NewsViewModel : BaseViewModel() {
+class NewsViewModel(private val application: Application) : BaseViewModel() {
+    private val repository: MovieRepository = MovieRepository()
 
+    val newsLiveData = MutableLiveData<List<Article>>()
 
-    private val repository: MovieRepository = MovieRepository(Apifactory.tmdbApi)
-
-
-    val popularMoviesLiveData = MutableLiveData<MutableList<Article>>()
-
-    fun fetchMovies() {
+    fun fetchNews() {
         scope.launch {
-            val movieResponse = safeApiCall(call = { repository.getPopularMovies().await() })
-            popularMoviesLiveData.postValue(movieResponse?.articles?.toMutableList())
+            val movieResponse = repository.getNewsList(application.applicationContext)
+            newsLiveData.postValue(movieResponse.data?.articles)
         }
     }
 
