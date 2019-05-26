@@ -4,5 +4,6 @@ enum class StatusCode {
     SUCCESS,
     ERROR,
     SERVER_ERROR,
-    NO_NETWORK
+    NO_NETWORK,
+    UNKNOWN
 }

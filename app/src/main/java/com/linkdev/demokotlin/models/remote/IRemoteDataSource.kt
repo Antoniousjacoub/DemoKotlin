@@ -6,6 +6,6 @@ import com.linkdev.demokotlin.models.news.NewsFeedResponse
 
 interface IRemoteDataSource {
 
-    fun getNews(page: String, pageSize: String): ResultResponse<NewsFeedResponse>
+   suspend fun getNews(page: String, pageSize: String): ResultResponse<NewsFeedResponse>
 
 }

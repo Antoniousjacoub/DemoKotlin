@@ -2,56 +2,63 @@ package com.linkdev.demokotlin.ui.base
 
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
-import android.arch.lifecycle.ViewModel
+import android.arch.lifecycle.MutableLiveData
+import com.linkdev.demokotlin.R
 import com.linkdev.demokotlin.models.ResultResponse
 import com.linkdev.demokotlin.models.StatusCode
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.newSingleThreadContext
-import retrofit2.Response
+import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
-open class BaseViewModel : ViewModel() {
+open class BaseViewModel(application: Application) : AndroidViewModel(application) {
+
+
+    private val onErrorAction: MutableLiveData<Int> = MutableLiveData()
+    private var showLoading: MutableLiveData<Boolean> = MutableLiveData()
+
     private val parentJob = Job()
 
     private val coroutineContext: CoroutineContext
-        get() = newSingleThreadContext("xcvxzc")
+        get() = parentJob + Dispatchers.IO
 
     protected val scope = CoroutineScope(coroutineContext)
 
-    private fun cancelAllRequests() = coroutineContext.cancel()
+    private fun cancelAllRequests() = scope.coroutineContext.cancel()
 
     override fun onCleared() {
-        cancelAllRequests()
         super.onCleared()
+        cancelAllRequests()
     }
 
-    suspend fun <T : Any> safeApiCall(call: suspend () -> Response<T>): T? {
-        val response = call.invoke()
+    private fun onSetError(int: Int) {
+        onErrorAction.postValue(int)
+    }
 
-        var data: T? = null
+    fun getErrorObserver(): MutableLiveData<Int> {
+        return onErrorAction
+    }
 
-        when (isValidResult(response)) {
-            StatusCode.SUCCESS -> {
-                data = response.body()
-                ResultResponse.Success(response)
+    fun onSetLoading(loading: Boolean) {
+        showLoading.postValue(loading)
+    }
+
+    fun getLoadingObserver(): MutableLiveData<Boolean> {
+        return showLoading
+    }
+
+    open fun <T> validateResponse(response: ResultResponse<T>?): StatusCode {
+        return when {
+            response === null -> {
+                onSetError(R.string.somthing_went_wrong)
+                StatusCode.ERROR
             }
-            StatusCode.ERROR -> {
+            response.codeStatus === StatusCode.NO_NETWORK -> {
+                onSetError(R.string.noInternetConnection)
+                StatusCode.NO_NETWORK
             }
-            StatusCode.SERVER_ERROR -> TODO()
-            StatusCode.NO_NETWORK -> TODO()
+            response.codeStatus === StatusCode.SUCCESS -> StatusCode.SUCCESS
 
+            else -> StatusCode.UNKNOWN
         }
-        return data
+
     }
-
-    private fun isValidResult(response: Response<out Any>): StatusCode {
-
-        if (!response.isSuccessful) {
-            return StatusCode.ERROR
-        }
-        return StatusCode.SUCCESS
-    }
-
 }

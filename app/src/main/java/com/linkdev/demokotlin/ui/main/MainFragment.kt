@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
 import com.linkdev.demokotlin.R
+import com.linkdev.demokotlin.common.helpers.SnackbarHelper
 import com.linkdev.demokotlin.models.news.Article
 import com.linkdev.demokotlin.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_main.*
@@ -28,17 +29,19 @@ class MainFragment : BaseFragment(), NewsFeedAdapter.OnItemNewsClicked {
         return R.layout.fragment_main
     }
 
-    override fun initializeViews(v: View) {
-    }
 
     override fun setListeners() {
+        swipe_refresh_layout.setOnRefreshListener { newsViewModel.fetchNews() }
     }
 
     override fun setObservers() {
-        newsViewModel.newsLiveData.observe(this, newOnSusscesObserver)
+        newsViewModel.getSuccessObserver().observe(this, newOnSusscesObserver)
+        newsViewModel.getErrorObserver().observe(this, onErroeObserver)
+        newsViewModel.getLoadingObserver().observe(this, loadingObserver)
     }
 
     override fun showProgress(shouldShow: Boolean) {
+        swipe_refresh_layout.isRefreshing=false
         if (shouldShow) {
             load_view.visibility = View.VISIBLE
         } else {
@@ -54,7 +57,7 @@ class MainFragment : BaseFragment(), NewsFeedAdapter.OnItemNewsClicked {
     }
 
     private fun initViewModel() {
-        val newsViewModelFactory = NewsViewModelFactory(activity?.application)
+        val newsViewModelFactory = NewsViewModelFactory(activity!!.application)
         newsViewModel = ViewModelProviders.of(this, newsViewModelFactory).get(NewsViewModel::class.java)
 
     }
@@ -63,5 +66,15 @@ class MainFragment : BaseFragment(), NewsFeedAdapter.OnItemNewsClicked {
         Log.d("newOnSusscesObserver", "" + it?.size)
         rv_news_feed.layoutManager = LinearLayoutManager(mContext)
         rv_news_feed.adapter = NewsFeedAdapter(it, this)
+    }
+    private var onErroeObserver = Observer<Int> {
+        Log.d("onErroeObserver", "" + it)
+        if (context != null && it != null && view != null) {
+            SnackbarHelper.showErrorMessage(context!!, view!!, it)
+        }
+    }
+    private var loadingObserver = Observer<Boolean> {
+        Log.d("loadingObserver", "" + it)
+        showProgress(it!!)
     }
 }

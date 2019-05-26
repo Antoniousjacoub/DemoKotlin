@@ -6,7 +6,7 @@ import android.arch.lifecycle.ViewModelProvider
 import android.os.Bundle
 
 @Suppress("UNCHECKED_CAST")
-class NewsViewModelFactory(private val application: Application?) : ViewModelProvider.NewInstanceFactory() {
+class NewsViewModelFactory(private val application: Application) : ViewModelProvider.NewInstanceFactory() {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(NewsViewModel::class.java)) {

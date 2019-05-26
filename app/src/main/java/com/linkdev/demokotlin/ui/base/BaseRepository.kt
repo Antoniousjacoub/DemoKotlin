@@ -6,7 +6,7 @@ import com.linkdev.demokotlin.common.helpers.Utils
 open class BaseRepository {
 
     fun isConnected(context: Context): Boolean {
-        return Utils().checkConnection(context)
+        return Utils.checkConnection(context)
     }
 
 }
