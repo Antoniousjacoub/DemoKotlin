@@ -22,7 +22,7 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
 
     protected val scope = CoroutineScope(coroutineContext)
 
-    private fun cancelAllRequests() = scope.coroutineContext.cancel()
+    private fun cancelAllRequests() = coroutineContext.cancel()
 
     override fun onCleared() {
         super.onCleared()
