@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.linkdev.demokotlin.R
+import com.linkdev.demokotlin.common.helpers.UIUtils
 import com.linkdev.demokotlin.models.news.Article
 import kotlinx.android.synthetic.main.item_news_feed.view.*
 
@@ -12,7 +13,7 @@ import kotlinx.android.synthetic.main.item_news_feed.view.*
  * Created by antonio on 1/16/19.
  */
 
-class NewsFeedAdapter(val mData: List<Article>?, val onItemNewsClicked: OnItemNewsClicked) :
+class NewsFeedAdapter(private val mData: List<Article>?) :
     RecyclerView.Adapter<NewsFeedAdapter.ViewHolder>() {
 
 
@@ -34,21 +35,24 @@ class NewsFeedAdapter(val mData: List<Article>?, val onItemNewsClicked: OnItemNe
         return mData?.size ?: 0
     }
 
-    interface OnItemNewsClicked {
-        fun onItemNewsClicked(article: Article)
-    }
 
     class ViewHolder(view: View) :
         RecyclerView.ViewHolder(view) {
-        val img_news_feed = view.img_news_feed
-        val tv_news_feed_title = view.tv_news_feed_title
-        val tv_author = view.tv_author
-        val tv_publish_date = view.tv_publish_date
+        private val imgNewsFeed = view.img_news_feed
+        private val tvNewsFeedTitle = view.tv_news_feed_title
+        private val tvAuthor = view.tv_author
+        private val tvPublishDate = view.tv_publish_date
 
         fun bind(article: Article) {
-            tv_author.text = article.author
-            tv_news_feed_title.text = article.title
-            tv_publish_date.text = article.publishedAt
+            tvAuthor.text = article.author
+            tvNewsFeedTitle.text = article.title
+            tvPublishDate.text = article.publishedAt
+            if (article.url != null && itemView.context != null) {
+                UIUtils.loadImageWithPicasso(
+                    article.urlToImage!!, imgNewsFeed, itemView.context.getDrawable(R.drawable.placeholder)!!,
+                    itemView.context.getDrawable(R.drawable.placeholder)!!
+                )
+            }
         }
 
     }

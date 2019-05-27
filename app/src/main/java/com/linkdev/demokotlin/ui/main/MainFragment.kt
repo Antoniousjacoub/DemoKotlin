@@ -12,16 +12,14 @@ import com.linkdev.demokotlin.models.news.Article
 import com.linkdev.demokotlin.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_main.*
 
-class MainFragment : BaseFragment(), NewsFeedAdapter.OnItemNewsClicked {
+class MainFragment : BaseFragment() {
 
-    val TAG: String = "MainFragment"
+     val TAG: String = "MainFragment"
 
-    companion object Factorysds {
+    companion object Factory {
         fun create(): MainFragment = MainFragment()
     }
 
-    override fun onItemNewsClicked(article: Article) {
-    }
 
     private lateinit var newsViewModel: NewsViewModel
     private lateinit var mContext: Context
@@ -65,7 +63,7 @@ class MainFragment : BaseFragment(), NewsFeedAdapter.OnItemNewsClicked {
     private var newOnSusscesObserver = Observer<List<Article>> {
         Log.d("newOnSusscesObserver", "" + it?.size)
         rv_news_feed.layoutManager = LinearLayoutManager(mContext)
-        rv_news_feed.adapter = NewsFeedAdapter(it, this)
+        rv_news_feed.adapter = NewsFeedAdapter(it)
     }
     private var onErroeObserver = Observer<Int> {
         Log.d("onErroeObserver", "" + it)

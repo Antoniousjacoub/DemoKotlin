@@ -23,10 +23,10 @@ object NetworkingModule {
 
         chain.proceed(newRequest)
     }
-    val interceptorBody: HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
+    private val interceptorBody: HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
         this.level = HttpLoggingInterceptor.Level.BODY
     }
-    val interceptorHeader: HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
+    private val interceptorHeader: HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
         this.level = HttpLoggingInterceptor.Level.HEADERS
     }
 
@@ -38,7 +38,7 @@ object NetworkingModule {
         .build()
 
 
-    fun retrofit(): Retrofit = Retrofit.Builder()
+    private fun retrofit(): Retrofit = Retrofit.Builder()
         .client(okHttpClient)
         .baseUrl(Constants.BASE_URL)
         .addConverterFactory(MoshiConverterFactory.create())

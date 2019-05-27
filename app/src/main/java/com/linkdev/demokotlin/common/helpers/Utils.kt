@@ -11,4 +11,5 @@ object Utils {
         return activeNetInfo != null && activeNetInfo.isConnected
     }
 
+
 }
