@@ -3,7 +3,7 @@ package com.linkdev.demokotlin.models.remote
 import com.linkdev.demokotlin.R
 import com.linkdev.demokotlin.models.ResultResponse
 import com.linkdev.demokotlin.models.StatusCode
-import com.linkdev.demokotlin.models.news.NewsFeedResponse
+import com.linkdev.demokotlin.models.dto.NewsFeedResponse
 import com.linkdev.demokotlin.retrofit.NetworkingModule
 import com.linkdev.demokotlin.retrofit.ServicesInterface
 

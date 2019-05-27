@@ -5,7 +5,7 @@ import android.arch.lifecycle.MutableLiveData
 import com.linkdev.demokotlin.models.ResultResponse
 import com.linkdev.demokotlin.models.StatusCode.SUCCESS
 import com.linkdev.demokotlin.models.news.Article
-import com.linkdev.demokotlin.models.news.NewsFeedResponse
+import com.linkdev.demokotlin.models.dto.NewsFeedResponse
 import com.linkdev.demokotlin.ui.base.BaseViewModel
 import kotlinx.coroutines.launch
 

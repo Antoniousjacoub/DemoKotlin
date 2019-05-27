@@ -1,10 +1,11 @@
-package com.linkdev.demokotlin.models.news
+package com.linkdev.demokotlin.models.dto
 
 import android.annotation.SuppressLint
 import android.os.Parcel
 import android.os.Parcelable
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import com.linkdev.demokotlin.models.news.Article
 
 /**
  * Created by antonio on 1/16/19.

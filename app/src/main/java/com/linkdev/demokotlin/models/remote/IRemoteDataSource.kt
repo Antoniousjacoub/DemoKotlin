@@ -2,7 +2,7 @@ package com.linkdev.demokotlin.models.remote
 
 
 import com.linkdev.demokotlin.models.ResultResponse
-import com.linkdev.demokotlin.models.news.NewsFeedResponse
+import com.linkdev.demokotlin.models.dto.NewsFeedResponse
 
 interface IRemoteDataSource {
 
