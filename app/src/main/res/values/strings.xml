@@ -23,4 +23,5 @@
 
     <string name="news">News</string>
     <string name="noInternetConnection">No Internet Connection</string>
+    <string name="showLoactionOnMap">Show My Location</string>
 </resources>

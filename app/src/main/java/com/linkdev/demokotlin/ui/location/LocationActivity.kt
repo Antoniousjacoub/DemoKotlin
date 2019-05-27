@@ -1,18 +1,16 @@
-package com.linkdev.demokotlin.ui.main
+package com.linkdev.demokotlin.ui.location
 
 import android.os.Bundle
-import android.support.v7.widget.Toolbar
 import com.linkdev.demokotlin.R
 import com.linkdev.demokotlin.ui.base.BaseActivity
-import com.linkdev.demokotlin.ui.base.BaseActivityForDrawer
 
-class MainActivity : BaseActivityForDrawer() {
-
-
+class LocationActivity : BaseActivity() {
     override fun initializeViews() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun setListeners() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun layoutViewId(): Int {
@@ -21,11 +19,6 @@ class MainActivity : BaseActivityForDrawer() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        addFragment(
-            R.id.frmlContainer,
-            MainFragment.create(),
-            MainFragment().TAG
-        )
-        setupDrawer()
+// addFragment(R.id.frmlContainer,)
     }
 }
