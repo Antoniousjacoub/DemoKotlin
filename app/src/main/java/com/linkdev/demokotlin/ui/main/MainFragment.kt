@@ -13,16 +13,20 @@ import com.linkdev.demokotlin.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment : BaseFragment() {
+    override fun initializeViews(v: View) {
 
-     val TAG: String = "MainFragment"
-
-    companion object Factory {
-        fun create(): MainFragment = MainFragment()
     }
-
 
     private lateinit var newsViewModel: NewsViewModel
     private lateinit var mContext: Context
+
+    companion object {
+        const val TAG: String = "MainFragment"
+        fun create(): MainFragment {
+            return MainFragment()
+        }
+
+    }
     override fun layoutViewId(): Int {
         return R.layout.fragment_main
     }
@@ -39,7 +43,7 @@ class MainFragment : BaseFragment() {
     }
 
     override fun showProgress(shouldShow: Boolean) {
-        swipe_refresh_layout.isRefreshing=false
+        swipe_refresh_layout.isRefreshing = false
         if (shouldShow) {
             load_view.visibility = View.VISIBLE
         } else {

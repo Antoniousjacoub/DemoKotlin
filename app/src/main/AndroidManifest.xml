@@ -5,6 +5,7 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <application
             android:allowBackup="true"
@@ -14,15 +15,28 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.location.LocationActivity">
+
+        <meta-data
+                android:name="com.google.android.geo.API_KEY"
+                android:value="AIzaSyCyTc0y6U7bn7BrWZEPf4m2yXxgdqYPECs"/>
+        <activity android:name=".ui.location.LocationActivity"
+                  android:parentActivityName=".ui.main.MainActivity"
+        >
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".ui.main.MainActivity"
+            />
         </activity>
-        <activity android:name=".ui.main.MainActivity">
+        <activity
+                android:launchMode="singleTop"
+                android:name=".ui.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".ui.testLoc.MapsActivity"/>
     </application>
 
 </manifest>

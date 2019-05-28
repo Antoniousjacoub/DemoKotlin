@@ -3,7 +3,6 @@ package com.linkdev.demokotlin.ui.main
 import android.app.Application
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
-import android.os.Bundle
 
 @Suppress("UNCHECKED_CAST")
 class NewsViewModelFactory(private val application: Application) : ViewModelProvider.NewInstanceFactory() {

@@ -17,7 +17,7 @@ abstract class BaseFragment : Fragment() {
     protected abstract fun setListeners()
 
     protected abstract fun setObservers()
-
+    protected abstract fun initializeViews(v: View)
     abstract fun showProgress(shouldShow: Boolean)
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -30,7 +30,9 @@ abstract class BaseFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        return inflater.inflate(layoutViewId(), container, false)
+        val rootView = inflater.inflate(layoutViewId(), container, false)
+        initializeViews(rootView)
+        return rootView
     }
 
 }

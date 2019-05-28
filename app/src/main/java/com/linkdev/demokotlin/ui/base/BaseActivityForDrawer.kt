@@ -1,25 +1,24 @@
 package com.linkdev.demokotlin.ui.base
 
+
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.FrameLayout
 import com.linkdev.demokotlin.R
 import com.linkdev.demokotlin.models.dto.DrawerItem
+import com.linkdev.demokotlin.ui.location.LocationActivity
 import kotlinx.android.synthetic.main.activity_base_for_drawer.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
-
-
-import java.util.ArrayList
+import java.util.*
 
 abstract class BaseActivityForDrawer : BaseActivity(), CustomDrawerAdapter.OnItemSideMenuClicked {
 
     override fun setContentView(layoutResID: Int) {
         val fullView = layoutInflater.inflate(R.layout.activity_base_for_drawer, null) as DrawerLayout
-        val activityContainer = fullView.findViewById<FrameLayout>(R.id.flContent)
+        val activityContainer = fullView.findViewById(R.id.flContent) as FrameLayout
         layoutInflater.inflate(layoutResID, activityContainer, true)
         super.setContentView(fullView)
-
 
     }
 
@@ -48,7 +47,9 @@ abstract class BaseActivityForDrawer : BaseActivity(), CustomDrawerAdapter.OnIte
     override fun onItemSideMenuClicked(position: Int) {
         drawer_layout.closeDrawers()
         when (position) {
-            SideMenuItems.OPEN_MAP ->{}
+            SideMenuItems.OPEN_MAP -> {
+                LocationActivity.startActivity(this)
+            }
         }
     }
 

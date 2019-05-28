@@ -4,8 +4,8 @@ import android.app.Application
 import android.arch.lifecycle.MutableLiveData
 import com.linkdev.demokotlin.models.ResultResponse
 import com.linkdev.demokotlin.models.StatusCode.SUCCESS
-import com.linkdev.demokotlin.models.news.Article
 import com.linkdev.demokotlin.models.dto.NewsFeedResponse
+import com.linkdev.demokotlin.models.news.Article
 import com.linkdev.demokotlin.ui.base.BaseViewModel
 import kotlinx.coroutines.launch
 
@@ -28,11 +28,9 @@ class NewsViewModel(application: Application) : BaseViewModel(application) {
         return newsLiveData
     }
 
-    private  fun onHandleResponse(response: ResultResponse<NewsFeedResponse>) {
-        when (validateResponse(response)) {
-            SUCCESS -> {
-                newsLiveData.postValue(response.data?.articles)
-            }
+    private fun onHandleResponse(response: ResultResponse<NewsFeedResponse>) {
+        if (validateResponse(response) == SUCCESS) {
+            newsLiveData.postValue(response.data?.articles)
         }
     }
 
