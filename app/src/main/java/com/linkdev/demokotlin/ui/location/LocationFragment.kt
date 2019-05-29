@@ -2,6 +2,7 @@ package com.linkdev.demokotlin.ui.location
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
@@ -9,8 +10,8 @@ import android.location.Location
 import android.location.LocationManager
 import android.provider.Settings
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.View
-import com.google.android.gms.location.LocationListener
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -20,9 +21,10 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.linkdev.demokotlin.R
+import com.linkdev.demokotlin.common.helpers.SnackbarHelper
 import com.linkdev.demokotlin.ui.base.PermissionHandlerFragment
 
-class LocationFragment : PermissionHandlerFragment(), OnMapReadyCallback, LocationListener {
+class LocationFragment : PermissionHandlerFragment(), OnMapReadyCallback {
 
     companion object {
         private const val REQUEST_LOCATION_CODE = 101
@@ -47,7 +49,9 @@ class LocationFragment : PermissionHandlerFragment(), OnMapReadyCallback, Locati
 
     override fun onViewReady(context: Context) {
         initViewModel()
+        setObservers()
         checkPermissions(context, REQUEST_LOCATION_CODE, Manifest.permission.ACCESS_FINE_LOCATION)
+
 
     }
 
@@ -59,19 +63,25 @@ class LocationFragment : PermissionHandlerFragment(), OnMapReadyCallback, Locati
     }
 
     override fun setObservers() {
+        locationViewModel.getOnSuccessLoadLocation().observe(this, locationOnSuccessObserver)
+        locationViewModel.getErrorObserver().observe(this, onErroeObserver)
     }
 
     override fun showProgress(shouldShow: Boolean) {
     }
 
     override fun onPermissionDenied(codePermission: Int) {
-        val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
-        startActivity(intent)
+        if (codePermission == REQUEST_LOCATION_CODE) {
+            val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+            startActivity(intent)
+        }
     }
 
     @SuppressLint("MissingPermission")
     override fun onPermissionGranted(codePermission: Int) {
-        locationViewModel.buildGoogleApiClient()
+        if (codePermission == REQUEST_LOCATION_CODE) {
+            locationViewModel.buildGoogleApiClient()
+        }
     }
 
     override fun initializeViews(v: View) {
@@ -82,16 +92,22 @@ class LocationFragment : PermissionHandlerFragment(), OnMapReadyCallback, Locati
     }
 
     private fun initViewModel() {
-        val locationViewModelFactory = LocationViewModelFactory(activity!!.application, this)
+        val locationViewModelFactory = LocationViewModelFactory(activity!!.application)
         locationViewModel = ViewModelProviders.of(this, locationViewModelFactory).get(LocationViewModel::class.java)
 
     }
 
-    override fun onLocationChanged(location: Location?) {
+    private var onErroeObserver = Observer<Int> {
+        Log.d("onErroeObserver", "" + it)
+        if (context != null && it != null && view != null) {
+            SnackbarHelper.showErrorMessage(context!!, view!!, it)
+        }
+    }
+    private var locationOnSuccessObserver = Observer<Location> {
         if (mCurrLocationMarker != null) {
             mCurrLocationMarker!!.remove()
         }
-        val latLng = LatLng(location!!.latitude, location.longitude)
+        val latLng = LatLng(it!!.latitude, it.longitude)
         val markerOptions = MarkerOptions()
         markerOptions.position(latLng)
         markerOptions.title(getString(R.string.myLocation))

@@ -29,7 +29,7 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
         cancelAllRequests()
     }
 
-    private fun onSetError(int: Int) {
+     fun onSetError(int: Int) {
         onErrorAction.postValue(int)
     }
 
