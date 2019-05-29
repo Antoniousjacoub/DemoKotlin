@@ -4,11 +4,7 @@ import android.annotation.SuppressLint
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
-import android.content.Intent
 import android.location.Location
-import android.location.LocationManager
-import android.provider.Settings
-import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -21,7 +17,9 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.linkdev.demokotlin.R
 import com.linkdev.demokotlin.common.helpers.SnackbarHelper
+import com.linkdev.demokotlin.common.helpers.Utils.checkEnableGPS
 import com.linkdev.demokotlin.ui.base.PermissionHandlerFragment
+
 
 class LocationFragment : PermissionHandlerFragment(), OnMapReadyCallback {
     private val permissionsLocation =
@@ -34,60 +32,56 @@ class LocationFragment : PermissionHandlerFragment(), OnMapReadyCallback {
         fun newInstance() = LocationFragment()
     }
 
-    private lateinit var locationViewModel: LocationViewModel
-
-    private var service: LocationManager? = null
-    private var enabled: Boolean? = null
-
+    private var locationViewModel: LocationViewModel? = null
     private var mCurrLocationMarker: Marker? = null
     private lateinit var mMap: GoogleMap
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
         mMap.mapType = GoogleMap.MAP_TYPE_NORMAL
-
     }
 
     override fun onViewReady(context: Context) {
         initViewModel()
         setObservers()
-        checkPermissions(context, REQUEST_LOCATION_CODE, *permissionsLocation)
-
-
     }
 
     override fun layoutViewId(): Int {
-        return R.layout.fragment_location
+        return com.linkdev.demokotlin.R.layout.fragment_location
     }
 
     override fun setListeners() {
     }
 
     override fun setObservers() {
-        locationViewModel.getOnSuccessLoadLocation().observe(this, locationOnSuccessObserver)
-        locationViewModel.getErrorObserver().observe(this, onErroeObserver)
+        if (locationViewModel != null) {
+            locationViewModel!!.getOnSuccessLoadLocation().observe(this, locationOnSuccessObserver)
+            locationViewModel!!.getErrorObserver().observe(this, onErroeObserver)
+        }
     }
 
     override fun showProgress(shouldShow: Boolean) {
     }
 
     override fun onPermissionDenied(codePermission: Int) {
-        if (codePermission == REQUEST_LOCATION_CODE) {
-            val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
-            startActivity(intent)
-        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (checkEnableGPS(context))
+            checkPermissions(context, REQUEST_LOCATION_CODE, *permissionsLocation)
     }
 
     @SuppressLint("MissingPermission")
     override fun onPermissionGranted(codePermission: Int) {
         if (codePermission == REQUEST_LOCATION_CODE) {
-            locationViewModel.buildGoogleApiClient()
+            if (locationViewModel != null) {
+                locationViewModel!!.requestMyLocation()
+            }
         }
     }
 
     override fun initializeViews(v: View) {
-        service = context!!.getSystemService(AppCompatActivity.LOCATION_SERVICE) as LocationManager
-        enabled = service!!.isProviderEnabled(LocationManager.GPS_PROVIDER)
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
     }

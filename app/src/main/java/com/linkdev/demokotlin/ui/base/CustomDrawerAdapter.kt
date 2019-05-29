@@ -1,6 +1,7 @@
 package com.linkdev.demokotlin.ui.base
 
 import android.content.Context
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -61,12 +62,12 @@ class CustomDrawerAdapter(
             onItemSideMenuClicked: OnItemSideMenuClicked
         ) {
             drawer_itemName.text = drawerItem.itemName
-            drawer_icon.setImageDrawable(itemView.context.resources.getDrawable(drawerItem.imgResID))
+            drawer_icon.setImageDrawable(ContextCompat.getDrawable(itemView.context,drawerItem.imgResID))
             itemView.setOnClickListener {
                 onItemSideMenuClicked.onItemSideMenuClicked(adapterPosition)
             }
             if (adapterPosition == lastPosition) {
-                image_selected_item.setImageDrawable(itemView.context.resources.getDrawable(R.drawable.selected))
+                image_selected_item.setImageDrawable(ContextCompat.getDrawable(itemView.context,R.drawable.selected))
             } else {
                 image_selected_item.setImageDrawable(null)
             }

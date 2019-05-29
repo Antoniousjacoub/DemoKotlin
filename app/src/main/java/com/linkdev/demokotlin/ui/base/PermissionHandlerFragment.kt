@@ -11,7 +11,8 @@ abstract class PermissionHandlerFragment : BaseFragment() {
     protected abstract fun onPermissionDenied(codePermission: Int)
 
 
-    protected fun checkPermissions(context: Context, permissionCode: Int, vararg permissions: String) {
+    protected fun checkPermissions(context: Context?, permissionCode: Int, vararg permissions: String) {
+        if (context==null)return
         if (!hasPermissions(context, *permissions)) {
             requestPermissions(permissions, permissionCode)
         } else {
