@@ -29,4 +29,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="myLocation">My Loaction</string>
     <string name="failedToGetLocation">Failed to get location</string>
+    <string name="GPSPermissionNeeded">GPS Permission Needed</string>
+    <string name="pleaseEnableGPS">Please enable your GPS</string>
+    <string name="ok">OK</string>
 </resources>

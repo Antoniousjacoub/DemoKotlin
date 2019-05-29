@@ -6,6 +6,7 @@ import android.location.LocationManager
 import android.net.ConnectivityManager
 import android.provider.Settings
 import android.support.v7.app.AlertDialog
+import com.linkdev.demokotlin.R
 
 object Utils {
     fun checkConnection(context: Context): Boolean {
@@ -22,9 +23,9 @@ object Utils {
             return true
         }
         AlertDialog.Builder(context)
-            .setTitle("GPS Permission Needed")
-            .setMessage("Please enable your GPS")
-            .setPositiveButton("OK") { dialog, which ->
+            .setTitle(context.getString(R.string.GPSPermissionNeeded))
+            .setMessage(context.getString(R.string.pleaseEnableGPS))
+            .setPositiveButton(context.getString(R.string.ok)) { _, _ ->
                 val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
                 context.startActivity(intent)
             }

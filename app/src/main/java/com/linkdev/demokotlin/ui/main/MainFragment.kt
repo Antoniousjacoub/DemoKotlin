@@ -27,6 +27,7 @@ class MainFragment : BaseFragment() {
         }
 
     }
+
     override fun layoutViewId(): Int {
         return R.layout.fragment_main
     }
@@ -77,6 +78,7 @@ class MainFragment : BaseFragment() {
     }
     private var loadingObserver = Observer<Boolean> {
         Log.d("loadingObserver", "" + it)
-        showProgress(it!!)
+        if (it != null)
+            showProgress(it)
     }
 }

@@ -11,8 +11,10 @@ class LocationViewModel(application: Application) :
     BaseViewModel(application) {
     private val onSuccessLoadLocation: MutableLiveData<Location> = MutableLiveData()
     fun requestMyLocation() {
+        onSetLoading(true)
         val locationResult = object : LocationHelper.MyLocationResult() {
             override fun gotLocation(location: Location?) {
+                onSetLoading(false)
                 //Got the location!
                 if (location != null) {
                     onSuccessLoadLocation.postValue(location)

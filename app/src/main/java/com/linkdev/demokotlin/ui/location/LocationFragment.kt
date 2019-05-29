@@ -19,6 +19,7 @@ import com.linkdev.demokotlin.R
 import com.linkdev.demokotlin.common.helpers.SnackbarHelper
 import com.linkdev.demokotlin.common.helpers.Utils.checkEnableGPS
 import com.linkdev.demokotlin.ui.base.PermissionHandlerFragment
+import kotlinx.android.synthetic.main.fragment_main.*
 
 
 class LocationFragment : PermissionHandlerFragment(), OnMapReadyCallback {
@@ -54,13 +55,19 @@ class LocationFragment : PermissionHandlerFragment(), OnMapReadyCallback {
     }
 
     override fun setObservers() {
-        if (locationViewModel != null) {
-            locationViewModel!!.getOnSuccessLoadLocation().observe(this, locationOnSuccessObserver)
-            locationViewModel!!.getErrorObserver().observe(this, onErroeObserver)
-        }
+        locationViewModel?.getOnSuccessLoadLocation()?.observe(this, locationOnSuccessObserver)
+        locationViewModel?.getErrorObserver()?.observe(this, onErroeObserver)
+        locationViewModel?.getLoadingObserver()?.observe(this, loadingObserver)
+
+
     }
 
     override fun showProgress(shouldShow: Boolean) {
+        if (shouldShow) {
+            load_view.visibility = View.VISIBLE
+        } else {
+            load_view.visibility = View.GONE
+        }
     }
 
     override fun onPermissionDenied(codePermission: Int) {
@@ -75,9 +82,9 @@ class LocationFragment : PermissionHandlerFragment(), OnMapReadyCallback {
     @SuppressLint("MissingPermission")
     override fun onPermissionGranted(codePermission: Int) {
         if (codePermission == REQUEST_LOCATION_CODE) {
-            if (locationViewModel != null) {
-                locationViewModel!!.requestMyLocation()
-            }
+
+            locationViewModel?.requestMyLocation()
+
         }
     }
 
@@ -99,9 +106,7 @@ class LocationFragment : PermissionHandlerFragment(), OnMapReadyCallback {
         }
     }
     private var locationOnSuccessObserver = Observer<Location> {
-        if (mCurrLocationMarker != null) {
-            mCurrLocationMarker!!.remove()
-        }
+        mCurrLocationMarker?.remove()
         val latLng = LatLng(it!!.latitude, it.longitude)
         val markerOptions = MarkerOptions()
         markerOptions.position(latLng)
@@ -110,5 +115,9 @@ class LocationFragment : PermissionHandlerFragment(), OnMapReadyCallback {
         mCurrLocationMarker = mMap.addMarker(markerOptions)
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
     }
-
+    private var loadingObserver = Observer<Boolean> {
+        Log.d("loadingObserver", "" + it)
+        if (it != null)
+            showProgress(it)
+    }
 }
