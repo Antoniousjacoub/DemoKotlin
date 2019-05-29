@@ -1,6 +1,5 @@
 package com.linkdev.demokotlin.ui.location
 
-import android.Manifest
 import android.annotation.SuppressLint
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
@@ -25,6 +24,8 @@ import com.linkdev.demokotlin.common.helpers.SnackbarHelper
 import com.linkdev.demokotlin.ui.base.PermissionHandlerFragment
 
 class LocationFragment : PermissionHandlerFragment(), OnMapReadyCallback {
+    private val permissionsLocation =
+        arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION)
 
     companion object {
         private const val REQUEST_LOCATION_CODE = 101
@@ -50,7 +51,7 @@ class LocationFragment : PermissionHandlerFragment(), OnMapReadyCallback {
     override fun onViewReady(context: Context) {
         initViewModel()
         setObservers()
-        checkPermissions(context, REQUEST_LOCATION_CODE, Manifest.permission.ACCESS_FINE_LOCATION)
+        checkPermissions(context, REQUEST_LOCATION_CODE, *permissionsLocation)
 
 
     }

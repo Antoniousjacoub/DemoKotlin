@@ -43,7 +43,8 @@ class LocationViewModel(application: Application) :
 
     override fun onCleared() {
         super.onCleared()
-        mGoogleApiClient!!.disconnect()
+        if (mGoogleApiClient != null)
+            mGoogleApiClient!!.disconnect()
     }
 
     override fun onConnectionFailed(p0: ConnectionResult) {
