@@ -17,7 +17,7 @@ class MainFragment : BaseFragment() {
 
     }
 
-    private lateinit var newsViewModel: NewsViewModel
+    private var newsViewModel: NewsViewModel? = null
     private lateinit var mContext: Context
 
     companion object {
@@ -34,13 +34,13 @@ class MainFragment : BaseFragment() {
 
 
     override fun setListeners() {
-        swipe_refresh_layout.setOnRefreshListener { newsViewModel.fetchNews() }
+        swipe_refresh_layout.setOnRefreshListener { newsViewModel?.fetchNews() }
     }
 
     override fun setObservers() {
-        newsViewModel.getSuccessObserver().observe(this, newOnSusscesObserver)
-        newsViewModel.getErrorObserver().observe(this, onErroeObserver)
-        newsViewModel.getLoadingObserver().observe(this, loadingObserver)
+        newsViewModel?.getSuccessObserver()?.observe(this, newOnSusscesObserver)
+        newsViewModel?.getErrorObserver()?.observe(this, onErroeObserver)
+        newsViewModel?.getLoadingObserver()?.observe(this, loadingObserver)
     }
 
     override fun showProgress(shouldShow: Boolean) {
@@ -55,7 +55,7 @@ class MainFragment : BaseFragment() {
     override fun onViewReady(context: Context) {
         mContext = context
         initViewModel()
-        newsViewModel.fetchNews()
+        newsViewModel?.fetchNews()
         setObservers()
     }
 
