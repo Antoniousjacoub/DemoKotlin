@@ -11,7 +11,7 @@ import com.linkdev.demokotlin.R
 
 abstract class BaseActivity : AppCompatActivity() {
 
-    private lateinit var myToolbar: Toolbar
+    private var myToolbar: Toolbar? = null
 
     @LayoutRes
     protected abstract fun layoutViewId(): Int
@@ -41,7 +41,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
     protected fun setToolbar(toolbar: Toolbar, title: String, showUpButton: Boolean, withElevation: Boolean) {
         myToolbar = toolbar
-        myToolbar.title = title
+        myToolbar?.title = title
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && withElevation) {
             toolbar.elevation = resources.getDimension(R.dimen.margin_medium)
         }
@@ -54,7 +54,7 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     fun setToolbarTitle(title: String) {
-        myToolbar.title = title
+        myToolbar?.title = title
 
     }
 
