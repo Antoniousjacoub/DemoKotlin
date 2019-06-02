@@ -19,15 +19,13 @@
     <string name="close">Close</string>
     <string name="open">Open</string>
     <string name="open_website">OPEN WEBSITE</string>
-    <string name="somthing_went_wrong">Somthing went wrong</string>
+    <string name="somthing_went_wrong">Something went wrong</string>
 
     <string name="news">News</string>
     <string name="noInternetConnection">No Internet Connection</string>
     <string name="showLoactionOnMap">Show My Location</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="myLocation">My Loaction</string>
+    <string name="myLocation">My Location</string>
     <string name="failedToGetLocation">Failed to get location</string>
     <string name="GPSPermissionNeeded">GPS Permission Needed</string>
     <string name="pleaseEnableGPS">Please enable your GPS</string>
