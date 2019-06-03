@@ -30,4 +30,7 @@
     <string name="GPSPermissionNeeded">GPS Permission Needed</string>
     <string name="pleaseEnableGPS">Please enable your GPS</string>
     <string name="ok">OK</string>
+    <string name="tryAnko">Try Anko</string>
+    <string name="name">Name</string>
+    <string name="password">Password</string>
 </resources>

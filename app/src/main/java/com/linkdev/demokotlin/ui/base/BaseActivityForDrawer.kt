@@ -7,9 +7,11 @@ import android.support.v7.widget.LinearLayoutManager
 import android.widget.FrameLayout
 import com.linkdev.demokotlin.R
 import com.linkdev.demokotlin.models.dto.DrawerItem
+import com.linkdev.demokotlin.ui.anko.MainActivityAnko
 import com.linkdev.demokotlin.ui.location.LocationActivity
 import kotlinx.android.synthetic.main.activity_base_for_drawer.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
+import org.jetbrains.anko.startActivity
 import java.util.*
 
 abstract class BaseActivityForDrawer : BaseActivity(), CustomDrawerAdapter.OnItemSideMenuClicked {
@@ -35,6 +37,10 @@ abstract class BaseActivityForDrawer : BaseActivity(), CustomDrawerAdapter.OnIte
         itemOne.itemName = getString(R.string.showLoactionOnMap)
         itemOne.imgResID = R.drawable.ic_explore
         dataListOFMenuItems.add(itemOne)
+        val itemTwo = DrawerItem()
+        itemTwo.itemName = getString(R.string.tryAnko)
+        itemTwo.imgResID = R.drawable.ic_explore
+        dataListOFMenuItems.add(itemTwo)
 
         val customDrawerAdapter = CustomDrawerAdapter(this, dataListOFMenuItems, this)
         val layoutManager = LinearLayoutManager(this)
@@ -50,11 +56,15 @@ abstract class BaseActivityForDrawer : BaseActivity(), CustomDrawerAdapter.OnIte
             SideMenuItems.OPEN_MAP -> {
                 LocationActivity.startActivity(this)
             }
+            SideMenuItems.OPEN_ANKO_ACTIVITY -> {
+                startActivity<MainActivityAnko>()
+            }
         }
     }
 
     private object SideMenuItems {
         const val OPEN_MAP = 0
+        const val OPEN_ANKO_ACTIVITY = 1
 
     }
 }

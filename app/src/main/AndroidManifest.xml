@@ -37,6 +37,16 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity
+                android:parentActivityName=".ui.main.MainActivity"
+                android:name=".ui.anko.MainActivityAnko">
+
+            <meta-data
+
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".ui.main.MainActivity"/>
+
+        </activity>
     </application>
 
 </manifest>
