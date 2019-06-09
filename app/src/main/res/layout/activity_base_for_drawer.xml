@@ -28,7 +28,7 @@
             android:layout_gravity="start"
             android:background="@color/white"
             android:fitsSystemWindows="true"
-            android:paddingTop="@dimen/dp_16"
+            android:paddingTop="@dimen/padding_large"
             app:itemIconTint="@color/white"
             app:itemTextColor="@color/white">
 
