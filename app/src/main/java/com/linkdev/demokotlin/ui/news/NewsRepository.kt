@@ -1,4 +1,4 @@
-package com.linkdev.demokotlin.ui.main
+package com.linkdev.demokotlin.ui.news
 
 import android.content.Context
 import com.linkdev.demokotlin.BuildConfig
@@ -10,7 +10,7 @@ import com.linkdev.demokotlin.models.dto.NewsFeedResponse
 import com.linkdev.demokotlin.models.remote.RemoteDataSource
 import com.linkdev.demokotlin.ui.base.BaseRepository
 
-class MovieRepository : BaseRepository() {
+class NewsRepository : BaseRepository() {
 
     private val api: RemoteDataSource = RemoteDataSource()
     suspend fun getNewsList(context: Context): ResultResponse<NewsFeedResponse> {

@@ -1,11 +1,10 @@
-package com.linkdev.demokotlin.ui.main
+package com.linkdev.demokotlin.ui.news
 
 import android.os.Bundle
-import android.support.v7.widget.Toolbar
 import com.linkdev.demokotlin.R
 import com.linkdev.demokotlin.ui.base.BaseActivityForDrawer
 
-class MainActivity : BaseActivityForDrawer() {
+class NewsActivity : BaseActivityForDrawer() {
 
 
 
@@ -24,8 +23,8 @@ class MainActivity : BaseActivityForDrawer() {
         super.onCreate(savedInstanceState)
         addFragment(
             R.id.frmlContainer,
-            MainFragment.create(),
-            MainFragment.TAG
+            NewsFragment.create(),
+            NewsFragment.TAG
         )
         setupDrawer()
     }

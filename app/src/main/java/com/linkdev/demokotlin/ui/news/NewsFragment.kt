@@ -1,4 +1,4 @@
-package com.linkdev.demokotlin.ui.main
+package com.linkdev.demokotlin.ui.news
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
@@ -12,7 +12,7 @@ import com.linkdev.demokotlin.models.news.Article
 import com.linkdev.demokotlin.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_main.*
 
-class MainFragment : BaseFragment() {
+class NewsFragment : BaseFragment() {
     override fun initializeViews(v: View) {
 
     }
@@ -21,9 +21,9 @@ class MainFragment : BaseFragment() {
     private lateinit var mContext: Context
 
     companion object {
-        const val TAG: String = "MainFragment"
-        fun create(): MainFragment {
-            return MainFragment()
+        const val TAG: String = "NewsFragment"
+        fun create(): NewsFragment {
+            return NewsFragment()
         }
 
     }

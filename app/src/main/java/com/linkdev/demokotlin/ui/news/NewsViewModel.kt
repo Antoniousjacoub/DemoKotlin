@@ -1,4 +1,4 @@
-package com.linkdev.demokotlin.ui.main
+package com.linkdev.demokotlin.ui.news
 
 import android.app.Application
 import android.arch.lifecycle.MutableLiveData
@@ -10,7 +10,7 @@ import com.linkdev.demokotlin.ui.base.BaseViewModel
 import kotlinx.coroutines.launch
 
 class NewsViewModel(application: Application) : BaseViewModel(application) {
-    private val repository: MovieRepository = MovieRepository()
+    private val repository: NewsRepository = NewsRepository()
 
     private val newsLiveData = MutableLiveData<List<Article>>()
 

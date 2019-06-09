@@ -1,4 +1,4 @@
-package com.linkdev.demokotlin.ui.main
+package com.linkdev.demokotlin.ui.news
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -22,7 +22,7 @@ class NewsFeedAdapter(private val mData: List<Article>?) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val article = mData!![position]
+        val article = mData?.get(position)
         holder.bind(article)
     }
 
@@ -43,16 +43,15 @@ class NewsFeedAdapter(private val mData: List<Article>?) :
         private val tvAuthor = view.tv_author
         private val tvPublishDate = view.tv_publish_date
 
-        fun bind(article: Article) {
-            tvAuthor.text = article.author
-            tvNewsFeedTitle.text = article.title
-            tvPublishDate.text = article.publishedAt
-            if (article.url != null && itemView.context != null) {
-                UIUtils.loadImageWithPicasso(
-                    article.urlToImage!!, imgNewsFeed, itemView.context.getDrawable(R.drawable.placeholder)!!,
-                    itemView.context.getDrawable(R.drawable.placeholder)!!
-                )
-            }
+        fun bind(article: Article?) {
+            tvAuthor.text = article?.author
+            tvNewsFeedTitle.text = article?.title
+            tvPublishDate.text = article?.publishedAt
+            UIUtils.loadImageWithPicasso(
+                article?.urlToImage!!, imgNewsFeed, itemView.context.getDrawable(R.drawable.placeholder)!!,
+                itemView.context.getDrawable(R.drawable.placeholder)!!
+            )
+
         }
 
     }

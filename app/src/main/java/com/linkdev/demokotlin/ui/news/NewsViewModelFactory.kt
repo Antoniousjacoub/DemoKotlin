@@ -1,4 +1,4 @@
-package com.linkdev.demokotlin.ui.main
+package com.linkdev.demokotlin.ui.news
 
 import android.app.Application
 import android.arch.lifecycle.ViewModel

@@ -22,21 +22,22 @@
         <activity
 
                 android:name=".ui.location.LocationActivity"
-                android:parentActivityName=".ui.main.MainActivity">
+                android:parentActivityName=".ui.news.NewsActivity">
             <meta-data
 
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".ui.main.MainActivity"/>
+                    android:value=".ui.news.NewsActivity"/>
         </activity>
         <activity
                 android:launchMode="singleTop"
-                android:name=".ui.main.MainActivity">
+                android:name=".ui.news.NewsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".ui.newsDetails.NewsDetailsActivity"/>
     </application>
 
 </manifest>
