@@ -6,7 +6,6 @@ import android.widget.Button
 import android.widget.EditText
 import com.linkdev.demokotlin.R
 import org.jetbrains.anko.*
-import org.jetbrains.anko.sdk25.coroutines.onClick
 
 
 class MainActivityUI : AnkoComponent<MainActivityAnko> {
@@ -23,7 +22,7 @@ class MainActivityUI : AnkoComponent<MainActivityAnko> {
 
             imageView(android.R.drawable.ic_menu_manage).lparams {
                 margin = dip(16)
-                gravity = Gravity.TOP
+                gravity = Gravity.TOP or Gravity.CENTER
 
             }
 
@@ -33,10 +32,10 @@ class MainActivityUI : AnkoComponent<MainActivityAnko> {
             val password = editText {
                 hintResource = R.string.password
                 inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
-            }.lparams(width= matchParent,height = wrapContent)
+            }.lparams(width = matchParent, height = wrapContent)
 
             button("Log in") {
-//                onClick {
+                //                onClick {
 //                    ui.owner.tryLogin(ui, name.text, password.text)
 //                }
             }
