@@ -30,7 +30,7 @@
         </activity>
         <activity
                 android:launchMode="singleTop"
-                android:name=".ui.news.NewsActivity">
+                android:name=".ui.login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -47,6 +47,7 @@
                     android:value=".ui.news.NewsActivity"/>
 
         </activity>
+        <activity android:name=".ui.news.NewsActivity"/>
     </application>
 
 </manifest>
