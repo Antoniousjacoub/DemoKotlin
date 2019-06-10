@@ -1,6 +1,5 @@
 package com.linkdev.demokotlin.models.news
 
-import android.annotation.SuppressLint
 import android.os.Parcel
 import android.os.Parcelable
 import com.google.gson.annotations.Expose
@@ -55,8 +54,7 @@ class Article : Parcelable {
     }
 
     companion object {
-
-        @SuppressLint("ParcelCreator")
+        @JvmField
         val CREATOR: Parcelable.Creator<Article> = object : Parcelable.Creator<Article> {
 
 

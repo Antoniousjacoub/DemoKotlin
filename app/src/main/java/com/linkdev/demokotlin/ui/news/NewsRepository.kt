@@ -17,7 +17,7 @@ class NewsRepository : BaseRepository() {
         return if (isConnected(context)) {
             api.getNews(Constants.SOURCE, BuildConfig.API_KEY)
         } else {
-            ResultResponse.Error<NewsFeedResponse>(R.string.noInternetConnection, StatusCode.NO_NETWORK)
+            ResultResponse.Error(R.string.noInternetConnection, StatusCode.NO_NETWORK)
         }
     }
 

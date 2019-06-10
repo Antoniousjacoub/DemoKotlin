@@ -23,6 +23,8 @@ android {
 
     buildTypes.each {
         it.buildConfigField 'String', 'API_KEY', API_KEY
+        it.buildConfigField ('String', 'BASE_URL', '"https://newsapi.org/v1/"')
+        it.buildConfigField ('String', 'SOURCE','"the-next-web"' )
     }
 }
 

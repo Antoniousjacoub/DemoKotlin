@@ -13,7 +13,10 @@ import kotlinx.android.synthetic.main.item_news_feed.view.*
  * Created by antonio on 1/16/19.
  */
 
-class NewsFeedAdapter(private val mData: List<Article>?) :
+class NewsFeedAdapter(
+    private val mData: List<Article>?,
+    private val onAdapterNewsInteraction: OnAdapterNewsInteraction
+) :
     RecyclerView.Adapter<NewsFeedAdapter.ViewHolder>() {
 
 
@@ -35,8 +38,11 @@ class NewsFeedAdapter(private val mData: List<Article>?) :
         return mData?.size ?: 0
     }
 
+    interface OnAdapterNewsInteraction {
+        fun onItemClicked(article: Article)
+    }
 
-    class ViewHolder(view: View) :
+    inner class ViewHolder(view: View) :
         RecyclerView.ViewHolder(view) {
         private val imgNewsFeed = view.img_news_feed
         private val tvNewsFeedTitle = view.tv_news_feed_title
@@ -51,6 +57,8 @@ class NewsFeedAdapter(private val mData: List<Article>?) :
                 article?.urlToImage!!, imgNewsFeed, itemView.context.getDrawable(R.drawable.placeholder)!!,
                 itemView.context.getDrawable(R.drawable.placeholder)!!
             )
+
+            itemView.setOnClickListener { onAdapterNewsInteraction.onItemClicked(article) }
 
         }
 

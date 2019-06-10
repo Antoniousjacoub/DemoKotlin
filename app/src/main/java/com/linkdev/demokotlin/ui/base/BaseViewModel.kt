@@ -9,7 +9,7 @@ import com.linkdev.demokotlin.models.StatusCode
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
-open class BaseViewModel(application: Application) : AndroidViewModel(application) {
+open class BaseViewModel(application: Application?) : AndroidViewModel(application!!) {
 
 
     private val onErrorAction: MutableLiveData<Int> = MutableLiveData()
@@ -29,7 +29,7 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
         cancelAllRequests()
     }
 
-     fun onSetError(int: Int) {
+    fun onSetError(int: Int) {
         onErrorAction.postValue(int)
     }
 

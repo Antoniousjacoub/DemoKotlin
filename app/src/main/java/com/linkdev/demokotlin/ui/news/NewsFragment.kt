@@ -4,19 +4,15 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.view.View
 import com.linkdev.demokotlin.R
 import com.linkdev.demokotlin.common.helpers.SnackbarHelper
 import com.linkdev.demokotlin.models.news.Article
 import com.linkdev.demokotlin.ui.base.BaseFragment
+import com.linkdev.demokotlin.ui.newsDetails.NewsDetailsActivity
 import kotlinx.android.synthetic.main.fragment_main.*
 
-class NewsFragment : BaseFragment() {
-    override fun initializeViews(v: View) {
-
-    }
-
+class NewsFragment : BaseFragment(), NewsFeedAdapter.OnAdapterNewsInteraction {
     private var newsViewModel: NewsViewModel? = null
     private lateinit var mContext: Context
 
@@ -25,6 +21,15 @@ class NewsFragment : BaseFragment() {
         fun create(): NewsFragment {
             return NewsFragment()
         }
+
+    }
+
+    override fun onItemClicked(article: Article) {
+        if (context != null)
+            NewsDetailsActivity.startActivity(context!!, article)
+    }
+
+    override fun initializeViews(v: View) {
 
     }
 
@@ -66,18 +71,15 @@ class NewsFragment : BaseFragment() {
     }
 
     private var newOnSusscesObserver = Observer<List<Article>> {
-        Log.d("newOnSusscesObserver", "" + it?.size)
         rv_news_feed.layoutManager = LinearLayoutManager(mContext)
-        rv_news_feed.adapter = NewsFeedAdapter(it)
+        rv_news_feed.adapter = NewsFeedAdapter(it, this)
     }
     private var onErroeObserver = Observer<Int> {
-        Log.d("onErroeObserver", "" + it)
         if (context != null && it != null && view != null) {
             SnackbarHelper.showErrorMessage(context!!, view!!, it)
         }
     }
     private var loadingObserver = Observer<Boolean> {
-        Log.d("loadingObserver", "" + it)
         if (it != null)
             showProgress(it)
     }

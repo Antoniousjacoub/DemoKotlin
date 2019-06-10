@@ -15,9 +15,9 @@ class RemoteDataSource : IRemoteDataSource {
         val response: NewsFeedResponse
         return try {
             response = servicesInterface.getNews(source, key).await()
-            ResultResponse.Success<NewsFeedResponse>(response, StatusCode.SUCCESS)
+            ResultResponse.Success(response, StatusCode.SUCCESS)
         } catch (e: Exception) {
-            ResultResponse.Error<NewsFeedResponse>(R.string.error_communicating_with_server, StatusCode.ERROR)
+            ResultResponse.Error(R.string.error_communicating_with_server, StatusCode.ERROR)
         }
 
     }

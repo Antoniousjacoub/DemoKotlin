@@ -37,7 +37,16 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.newsDetails.NewsDetailsActivity"/>
+        <activity
+                android:launchMode="singleTop"
+                android:parentActivityName=".ui.news.NewsActivity"
+                android:name=".ui.newsDetails.NewsDetailsActivity">
+            <meta-data
+
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".ui.news.NewsActivity"/>
+
+        </activity>
     </application>
 
 </manifest>
