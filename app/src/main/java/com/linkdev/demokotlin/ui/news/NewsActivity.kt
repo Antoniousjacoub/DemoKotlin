@@ -7,7 +7,6 @@ import com.linkdev.demokotlin.ui.base.BaseActivityForDrawer
 class NewsActivity : BaseActivityForDrawer() {
 
 
-
     override fun initializeViews() {
 
     }

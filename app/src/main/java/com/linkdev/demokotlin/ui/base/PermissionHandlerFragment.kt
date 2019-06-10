@@ -12,7 +12,7 @@ abstract class PermissionHandlerFragment : BaseFragment() {
 
 
     protected fun checkPermissions(context: Context?, permissionCode: Int, vararg permissions: String) {
-        if (context==null)return
+        if (context == null) return
         if (!hasPermissions(context, *permissions)) {
             requestPermissions(permissions, permissionCode)
         } else {
@@ -21,7 +21,7 @@ abstract class PermissionHandlerFragment : BaseFragment() {
     }
 
     private fun hasPermissions(context: Context?, vararg permissions: String): Boolean {
-        if (context == null ) {
+        if (context == null) {
             return false
         }
         for (permission in permissions) {

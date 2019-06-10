@@ -24,7 +24,6 @@ class CustomDrawerAdapter(
     private var lastSelectedSideMenuPosition: Int = 0//make the 0 position the default selected
 
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.item_drawer_list, parent, false)
         return ViewHolder(view)
@@ -58,16 +57,16 @@ class CustomDrawerAdapter(
 
         fun bind(
             drawerItem: DrawerItem,
-             lastPosition: Int,
+            lastPosition: Int,
             onItemSideMenuClicked: OnItemSideMenuClicked
         ) {
             drawer_itemName.text = drawerItem.itemName
-            drawer_icon.setImageDrawable(ContextCompat.getDrawable(itemView.context,drawerItem.imgResID))
+            drawer_icon.setImageDrawable(ContextCompat.getDrawable(itemView.context, drawerItem.imgResID))
             itemView.setOnClickListener {
                 onItemSideMenuClicked.onItemSideMenuClicked(adapterPosition)
             }
             if (adapterPosition == lastPosition) {
-                image_selected_item.setImageDrawable(ContextCompat.getDrawable(itemView.context,R.drawable.selected))
+                image_selected_item.setImageDrawable(ContextCompat.getDrawable(itemView.context, R.drawable.selected))
             } else {
                 image_selected_item.setImageDrawable(null)
             }
