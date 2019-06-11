@@ -31,4 +31,5 @@
     <string name="pleaseEnableGPS">Please enable your GPS</string>
     <string name="ok">OK</string>
     <string name="newsDetails">News Details</string>
+    <string name="connect_with_facebook">Connect with facebook</string>
 </resources>

@@ -9,6 +9,7 @@ import com.linkdev.demokotlin.R
 import com.linkdev.demokotlin.models.dto.DrawerItem
 import com.linkdev.demokotlin.ui.location.LocationActivity
 import kotlinx.android.synthetic.main.activity_base_for_drawer.*
+import kotlinx.android.synthetic.main.layout_nav_header.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
 import java.util.*
 
@@ -28,18 +29,16 @@ abstract class BaseActivityForDrawer : BaseActivity(), CustomDrawerAdapter.OnIte
         drawerToggle.setHomeAsUpIndicator(R.drawable.ic_drawer)
         drawer_layout.addDrawerListener(drawerToggle)
         drawerToggle.syncState()
-
-
         val dataListOFMenuItems = ArrayList<DrawerItem>()
         val itemOne = DrawerItem()
         itemOne.itemName = getString(R.string.showLoactionOnMap)
         itemOne.imgResID = R.drawable.ic_explore
         dataListOFMenuItems.add(itemOne)
-
         val customDrawerAdapter = CustomDrawerAdapter(this, dataListOFMenuItems, this)
         val layoutManager = LinearLayoutManager(this)
         rv_menuList.layoutManager = layoutManager
         rv_menuList.adapter = customDrawerAdapter
+
 
     }
 

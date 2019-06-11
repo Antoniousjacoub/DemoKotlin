@@ -12,7 +12,7 @@ class LoginActivity : BaseActivity() {
         addFragment(
             R.id.frmlContainer,
             LoginFragment.create(),
-            LoginFragment.TAG
+            LoginAccountsAPIsFragment.TAG
         )
     }
 
