@@ -15,22 +15,26 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".ui.login.LoginActivity"
+                  android:screenOrientation="portrait">
+        </activity>
 
         <meta-data
                 android:name="com.google.android.geo.API_KEY"
                 android:value="@string/google_maps_key"/>
-        <activity
 
+        <activity
+                android:screenOrientation="portrait"
                 android:name=".ui.location.LocationActivity"
                 android:parentActivityName=".ui.news.NewsActivity">
             <meta-data
-
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value=".ui.news.NewsActivity"/>
         </activity>
         <activity
-                android:launchMode="singleTop"
-                android:name=".ui.login.LoginActivity">
+                android:screenOrientation="portrait"
+                android:name=".ui.splash.SplashActivity"
+                android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -38,16 +42,17 @@
             </intent-filter>
         </activity>
         <activity
+                android:screenOrientation="portrait"
+                android:name=".ui.newsDetails.NewsDetailsActivity"
                 android:launchMode="singleTop"
-                android:parentActivityName=".ui.news.NewsActivity"
-                android:name=".ui.newsDetails.NewsDetailsActivity">
+                android:parentActivityName=".ui.news.NewsActivity">
             <meta-data
-
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value=".ui.news.NewsActivity"/>
-
         </activity>
-        <activity android:name=".ui.news.NewsActivity"/>
+        <activity
+                android:screenOrientation="portrait"
+                android:name=".ui.news.NewsActivity"/>
     </application>
 
 </manifest>

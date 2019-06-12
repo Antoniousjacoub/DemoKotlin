@@ -25,7 +25,7 @@ object NetworkingModule {
 
     private fun retrofit(): Retrofit = Retrofit.Builder()
         .client(okHttpClient)
-        .baseUrl(Constants.BASE_URL)
+        .baseUrl(Constants.Network.BASE_URL)
         .addConverterFactory(MoshiConverterFactory.create())
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .build()

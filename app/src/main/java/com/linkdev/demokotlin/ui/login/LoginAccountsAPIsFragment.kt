@@ -3,13 +3,15 @@ package com.linkdev.demokotlin.ui.login
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.util.Log
+import android.widget.Toast
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.linkdev.demokotlin.R
 import com.linkdev.demokotlin.ui.base.BaseFragment
-import com.linkdev.demokotlin.ui.news.NewsViewModelFactory
+import com.twitter.sdk.android.core.*
+import com.twitter.sdk.android.core.identity.TwitterLoginButton
 
 
 abstract class LoginAccountsAPIsFragment : BaseFragment() {
@@ -53,5 +55,18 @@ abstract class LoginAccountsAPIsFragment : BaseFragment() {
         startActivityForResult(signInIntent, GOOGLE_SIGN_IN)
     }
 
+    protected fun twitterSignIn(loginButton: TwitterLoginButton){
+        loginButton.callback = object : Callback<TwitterSession>() {
+            override fun success(result: Result<TwitterSession>) {
+                val session = TwitterCore.getInstance().sessionManager.activeSession
+                val authToken = session.authToken
+
+            }
+
+            override fun failure(exception: TwitterException) {
+                loginViewModel?.onSetError(R.string.failedToSignTwitter)
+            }
+        }
+    }
 
 }

@@ -6,6 +6,9 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.FrameLayout
 import com.linkdev.demokotlin.R
+import com.linkdev.demokotlin.common.helpers.AppPreferences
+import com.linkdev.demokotlin.common.helpers.Constants
+import com.linkdev.demokotlin.common.helpers.UIUtils
 import com.linkdev.demokotlin.models.dto.DrawerItem
 import com.linkdev.demokotlin.ui.location.LocationActivity
 import kotlinx.android.synthetic.main.activity_base_for_drawer.*
@@ -38,8 +41,13 @@ abstract class BaseActivityForDrawer : BaseActivity(), CustomDrawerAdapter.OnIte
         val layoutManager = LinearLayoutManager(this)
         rv_menuList.layoutManager = layoutManager
         rv_menuList.adapter = customDrawerAdapter
-
-
+        tv_name.text = AppPreferences.getString(Constants.Keys.NAME, this, "")
+        UIUtils.loadImageWithPicasso(
+            AppPreferences.getString(Constants.Keys.PHOTO_URL, this, "")!!,
+            image_header_menu,
+            getDrawable(R.drawable.placeholder)!!,
+            getDrawable(R.drawable.placeholder)!!
+        )
     }
 
 

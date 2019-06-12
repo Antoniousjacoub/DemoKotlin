@@ -32,4 +32,5 @@
     <string name="ok">OK</string>
     <string name="newsDetails">News Details</string>
     <string name="connect_with_facebook">Connect with facebook</string>
+    <string name="failedToSignTwitter">Failed to sing in with twitter</string>
 </resources>

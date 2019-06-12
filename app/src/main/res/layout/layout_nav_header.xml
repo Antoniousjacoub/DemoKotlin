@@ -7,22 +7,23 @@
         android:orientation="horizontal"
         android:paddingTop="@dimen/padding_xlarge">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/image_header_menu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/widthImageHeader"
+            android:layout_height="@dimen/heightImageHeader"
             android:layout_marginStart="@dimen/margin_xlarge"
             android:layout_marginTop="@dimen/margin_small"
             android:layout_marginBottom="@dimen/margin_small"
             android:src="@drawable/ic_profile"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/ln_container_message_name"/>
 
     <LinearLayout
             android:id="@+id/ln_container_message_name"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_gravity="center"
             android:layout_marginStart="@dimen/margin_xlarge"
             android:layout_marginEnd="@dimen/margin_small"
@@ -44,6 +45,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/str_tony_roshdy"
                 android:maxLines="@integer/one_line"
+                android:ellipsize="end"
                 android:textColor="@color/black"
                 android:textSize="@dimen/normal_text_size"/>
 
@@ -52,7 +54,7 @@
     <ImageView
             android:id="@+id/imageView"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_gravity="center|end"
             android:layout_marginEnd="@dimen/margin_xlarge"
             android:layout_marginStart="@dimen/margin_xlarge"
