@@ -45,7 +45,7 @@ open class BaseViewModel(application: Application?) : AndroidViewModel(applicati
         return showLoading
     }
 
-    open fun <T> validateResponse(response: ResultResponse<T>?): StatusCode {
+    protected fun <T> validateResponse(response: ResultResponse<T>?): StatusCode {
         return when {
             response === null -> {
                 onSetError(R.string.somthing_went_wrong)

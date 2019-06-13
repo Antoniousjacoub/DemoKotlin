@@ -11,11 +11,10 @@ import kotlinx.coroutines.launch
 
 class NewsViewModel(application: Application) : BaseViewModel(application) {
     private val repository: NewsRepository = NewsRepository()
-
+    private var articleList: List<Article>? = null
     private val newsLiveData = MutableLiveData<List<Article>>()
 
-    fun fetchNews() {
-
+    private fun fetchNews() {
         scope.launch {
             onSetLoading(true)
             val response = repository.getNewsList(getApplication())
@@ -28,8 +27,17 @@ class NewsViewModel(application: Application) : BaseViewModel(application) {
         return newsLiveData
     }
 
+    fun onRequestNews() {
+        if (articleList == null) {
+            fetchNews()
+        } else {
+            newsLiveData.postValue(articleList)
+        }
+    }
+
     private fun onHandleResponse(response: ResultResponse<NewsFeedResponse>) {
         if (validateResponse(response) == SUCCESS) {
+            articleList = response.data?.articles
             newsLiveData.postValue(response.data?.articles)
         }
     }

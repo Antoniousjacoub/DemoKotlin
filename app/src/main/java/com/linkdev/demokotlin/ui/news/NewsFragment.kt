@@ -39,7 +39,7 @@ class NewsFragment : BaseFragment(), NewsFeedAdapter.OnAdapterNewsInteraction {
 
 
     override fun setListeners() {
-        swipe_refresh_layout.setOnRefreshListener { newsViewModel?.fetchNews() }
+        swipe_refresh_layout.setOnRefreshListener { newsViewModel?.onRequestNews() }
     }
 
     override fun setObservers() {
@@ -60,7 +60,7 @@ class NewsFragment : BaseFragment(), NewsFeedAdapter.OnAdapterNewsInteraction {
     override fun onViewReady(context: Context) {
         mContext = context
         initViewModel()
-        newsViewModel?.fetchNews()
+        newsViewModel?.onRequestNews()
         setObservers()
     }
 
