@@ -34,6 +34,7 @@ class LoginFragment : LoginAccountsAPIsFragment(), View.OnClickListener {
 
     override fun onViewReady(context: Context) {
         initViewModel()
+        setObservers()
     }
 
     override fun setListeners() {
@@ -47,8 +48,13 @@ class LoginFragment : LoginAccountsAPIsFragment(), View.OnClickListener {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        twitterSignIn(btnLoginWithTwitter)
+    }
+
     override fun layoutViewId(): Int {
-        if (context!=null) {
+        if (context != null) {
             Twitter.initialize(context)
         }
         return R.layout.fragment_login

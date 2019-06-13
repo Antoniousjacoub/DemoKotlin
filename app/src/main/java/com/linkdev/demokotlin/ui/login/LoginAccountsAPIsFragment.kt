@@ -3,7 +3,6 @@ package com.linkdev.demokotlin.ui.login
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.util.Log
-import android.widget.Toast
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.common.api.ApiException
@@ -16,11 +15,13 @@ import com.twitter.sdk.android.core.identity.TwitterLoginButton
 
 abstract class LoginAccountsAPIsFragment : BaseFragment() {
     var loginViewModel: LoginViewModel? = null
+    private var btnLoginWithTwitter: TwitterLoginButton? = null
     protected abstract fun onSuccussLogin(name: String?, profilePhotoURL: String?, email: String?)
 
     companion object {
         const val TAG: String = "LoginAccouFragment"
         const val GOOGLE_SIGN_IN: Int = 0
+        const val TWITTER_SIGN_IN: Int = 1
 
     }
 
@@ -35,6 +36,7 @@ abstract class LoginAccountsAPIsFragment : BaseFragment() {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             handleSignInResult(task)
         }
+
     }
 
     private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
@@ -55,8 +57,8 @@ abstract class LoginAccountsAPIsFragment : BaseFragment() {
         startActivityForResult(signInIntent, GOOGLE_SIGN_IN)
     }
 
-    protected fun twitterSignIn(loginButton: TwitterLoginButton){
-        loginButton.callback = object : Callback<TwitterSession>() {
+    protected fun twitterSignIn(loginButton: TwitterLoginButton?) {
+        loginButton?.callback = object : Callback<TwitterSession>() {
             override fun success(result: Result<TwitterSession>) {
                 val session = TwitterCore.getInstance().sessionManager.activeSession
                 val authToken = session.authToken

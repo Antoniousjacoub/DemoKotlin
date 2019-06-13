@@ -2,4 +2,6 @@
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">
         AIzaSyCyTc0y6U7bn7BrWZEPf4m2yXxgdqYPECs
     </string>
+    <!--<string name="com.twitter.sdk.android.CONSUMER_KEY" translatable="false">lnMZ9aSxiaLAL9q30lTVB8EHK</string>-->
+    <!--<string name="com.twitter.sdk.android.CONSUMER_SECRET" translatable="false">XOZG1XJsrVbeKpsV6GGXVfDFH8ZMZInbTlbTV9xLpURRja6yB7</string>-->
 </resources>

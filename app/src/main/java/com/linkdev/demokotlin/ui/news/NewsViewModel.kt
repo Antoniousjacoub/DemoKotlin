@@ -15,7 +15,6 @@ class NewsViewModel(application: Application) : BaseViewModel(application) {
     private val newsLiveData = MutableLiveData<List<Article>>()
 
     fun fetchNews() {
-
         scope.launch {
             onSetLoading(true)
             val response = repository.getNewsList(getApplication())
