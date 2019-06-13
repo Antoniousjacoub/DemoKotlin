@@ -33,4 +33,6 @@
     <string name="newsDetails">News Details</string>
     <string name="connect_with_facebook">Connect with facebook</string>
     <string name="failedToSignTwitter">Failed to sing in with twitter</string>
+    <!--<string name="com.twitter.sdk.android.CONSUMER_KEY" translatable="false">lnMZ9aSxiaLAL9q30lTVB8EHK</string>-->
+    <!--<string name="com.twitter.sdk.android.CONSUMER_SECRET" translatable="false">XOZG1XJsrVbeKpsV6GGXVfDFH8ZMZInbTlbTV9xLpURRja6yB7</string>-->
 </resources>
