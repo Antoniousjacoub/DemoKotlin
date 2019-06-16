@@ -1,5 +1,7 @@
 package com.linkdev.demokotlin.ui.splash
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.support.v7.app.AppCompatActivity
@@ -10,6 +12,12 @@ import com.linkdev.demokotlin.ui.login.LoginActivity
 import com.linkdev.demokotlin.ui.news.NewsActivity
 
 class SplashActivity : AppCompatActivity() {
+    companion object {
+        fun startActivity(context: Context) {
+            val intent = Intent(context, SplashActivity::class.java)
+            context.startActivity(intent)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

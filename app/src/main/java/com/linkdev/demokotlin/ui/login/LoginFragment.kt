@@ -3,16 +3,15 @@ package com.linkdev.demokotlin.ui.login
 import android.arch.lifecycle.Observer
 import android.content.Context
 import android.view.View
+import com.facebook.FacebookSdk
 import com.google.android.gms.common.SignInButton
 import com.linkdev.demokotlin.R
 import com.linkdev.demokotlin.common.helpers.AppPreferences
 import com.linkdev.demokotlin.common.helpers.Constants
 import com.linkdev.demokotlin.common.helpers.SnackbarHelper
 import com.linkdev.demokotlin.ui.news.NewsActivity
-import com.twitter.sdk.android.core.Twitter
-import kotlinx.android.synthetic.main.fragment_login.*
 
-class LoginFragment : LoginAccountsAPIsFragment(), View.OnClickListener {
+class LoginFragment : LoginHandlerFragment(), View.OnClickListener {
     private var signInButton: SignInButton? = null
 
     companion object {
@@ -22,7 +21,7 @@ class LoginFragment : LoginAccountsAPIsFragment(), View.OnClickListener {
         }
     }
 
-    override fun onSuccussLogin(name: String?, profilePhotoURL: String?, email: String?) {
+    override fun onSuccessLogin(name: String?, profilePhotoURL: String?, email: String?) {
         if (context != null) {
             AppPreferences.setString(Constants.Keys.NAME, name, context!!)
             AppPreferences.setString(Constants.Keys.PHOTO_URL, profilePhotoURL, context!!)
@@ -44,18 +43,17 @@ class LoginFragment : LoginAccountsAPIsFragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.btnLoginWithGoogle -> googleSignIn()
-            R.id.btnLoginWithTwitter -> twitterSignIn(btnLoginWithTwitter)
         }
     }
 
     override fun onResume() {
         super.onResume()
-        twitterSignIn(btnLoginWithTwitter)
+        facebookSignIn()
     }
 
     override fun layoutViewId(): Int {
         if (context != null) {
-            Twitter.initialize(context)
+            FacebookSdk.sdkInitialize(context)
         }
         return R.layout.fragment_login
     }
@@ -67,6 +65,7 @@ class LoginFragment : LoginAccountsAPIsFragment(), View.OnClickListener {
     override fun initializeViews(v: View) {
         signInButton = v.findViewById(R.id.btnLoginWithGoogle)
         signInButton?.setSize(SignInButton.SIZE_STANDARD)
+
     }
 
     private var onErrorObserver = Observer<Int> {

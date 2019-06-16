@@ -5,12 +5,14 @@ import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.FrameLayout
+import com.facebook.login.LoginManager
 import com.linkdev.demokotlin.R
 import com.linkdev.demokotlin.common.helpers.AppPreferences
 import com.linkdev.demokotlin.common.helpers.Constants
 import com.linkdev.demokotlin.common.helpers.UIUtils
 import com.linkdev.demokotlin.models.dto.DrawerItem
 import com.linkdev.demokotlin.ui.location.LocationActivity
+import com.linkdev.demokotlin.ui.splash.SplashActivity
 import kotlinx.android.synthetic.main.activity_base_for_drawer.*
 import kotlinx.android.synthetic.main.layout_nav_header.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
@@ -37,6 +39,10 @@ abstract class BaseActivityForDrawer : BaseActivity(), CustomDrawerAdapter.OnIte
         itemOne.itemName = getString(R.string.showLoactionOnMap)
         itemOne.imgResID = R.drawable.ic_explore
         dataListOFMenuItems.add(itemOne)
+        val itemLoguout = DrawerItem()
+        itemLoguout.itemName = getString(R.string.logout)
+        itemLoguout.imgResID = R.drawable.ic_logout
+        dataListOFMenuItems.add(itemLoguout)
         val customDrawerAdapter = CustomDrawerAdapter(this, dataListOFMenuItems, this)
         val layoutManager = LinearLayoutManager(this)
         rv_menuList.layoutManager = layoutManager
@@ -57,11 +63,18 @@ abstract class BaseActivityForDrawer : BaseActivity(), CustomDrawerAdapter.OnIte
             SideMenuItems.OPEN_MAP -> {
                 LocationActivity.startActivity(this)
             }
+            SideMenuItems.LOGOUT -> {
+                LoginManager.getInstance().logOut()
+                SplashActivity.startActivity(this)
+                AppPreferences.clearPerferences(this)
+                finish()
+            }
         }
     }
 
     private object SideMenuItems {
         const val OPEN_MAP = 0
+        const val LOGOUT = 1
 
     }
 }

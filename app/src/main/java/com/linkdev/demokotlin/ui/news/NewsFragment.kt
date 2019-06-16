@@ -59,6 +59,11 @@ class NewsFragment : BaseFragment(), NewsFeedAdapter.OnAdapterNewsInteraction {
 
     override fun onViewReady(context: Context) {
         mContext = context
+
+    }
+
+    override fun onStart() {
+        super.onStart()
         initViewModel()
         newsViewModel?.fetchNews()
         setObservers()
@@ -71,6 +76,7 @@ class NewsFragment : BaseFragment(), NewsFeedAdapter.OnAdapterNewsInteraction {
     }
 
     private var newOnSuccessObserver = Observer<List<Article>> {
+        swipe_refresh_layout.isRefreshing = false
         rv_news_feed.layoutManager = LinearLayoutManager(mContext)
         rv_news_feed.adapter = NewsFeedAdapter(it, this)
     }

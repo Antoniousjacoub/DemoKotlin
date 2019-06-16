@@ -35,6 +35,8 @@
     <string name="failedToSignTwitter">Failed to sing in with twitter</string>
     <string name="com.twitter.sdk.android.CONSUMER_KEY" tools:ignore="ExtraTranslation">lnMZ9aSxiaLAL9q30lTVB8EHK</string>
     <string name="com.twitter.sdk.android.CONSUMER_SECRET" tools:ignore="ExtraTranslation">XOZG1XJsrVbeKpsV6GGXVfDFH8ZMZInbTlbTV9xLpURRja6yB7</string>
+    <string name="failedToLoginFacebook">Failed to login by facebook</string>
+    <string name="logout">Logout</string>
     <!--<string name="com.twitter.sdk.android.CONSUMER_KEY" translatable="false">lnMZ9aSxiaLAL9q30lTVB8EHK</string>-->
     <!--<string name="com.twitter.sdk.android.CONSUMER_SECRET" translatable="false">XOZG1XJsrVbeKpsV6GGXVfDFH8ZMZInbTlbTV9xLpURRja6yB7</string>-->
 </resources>

@@ -6,6 +6,10 @@ import android.preference.PreferenceManager
 
 object AppPreferences {
 
+    fun clearPerferences(context: Context){
+        val appPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+        appPreferences.edit().clear().apply()
+    }
     fun getString(key: String, ctx: Context, defaultValue: String): String? {
         val appPreferences = PreferenceManager.getDefaultSharedPreferences(ctx)
         return appPreferences.getString(key, defaultValue)
