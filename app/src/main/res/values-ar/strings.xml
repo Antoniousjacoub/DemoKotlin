@@ -1,26 +1,24 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">LinkDevTask</string>
-    <string name="str_welcome">Welcome</string>
+    <string name="str_welcome">مرحبا</string>
     <string name="link_development">LINK DEVELOPMENT</string>
-    <string name="by">By</string>
+    <string name="by">بواسطة</string>
 
-    <string name="error_communicating_with_server">Error in communicating with server</string>
-    <string name="error_network">Error in network</string>
-    <string name="search">Search</string>
-    <string name="no_data_to_show">No data to show</string>
+    <string name="error_communicating_with_server">حدث خطأ من فضلك حاول ثانيا</string>
+    <string name="error_network">خطا فى الشبكة</string>
+    <string name="search">بحث </string>
     <string name="no_apps_can_resolve_the_intent">Sorry,No apps can resolve the intent</string>
 
-    <string name="close">Close</string>
-    <string name="open">Open</string>
-    <string name="open_website">OPEN WEBSITE</string>
-    <string name="somthing_went_wrong">Something went wrong</string>
+    <string name="close">اغلاق</string>
+    <string name="open">افتح</string>
+    <string name="open_website">افتح الموقع</string>
+    <string name="somthing_went_wrong">حدث خطأ </string>
 
-    <string name="news">News</string>
-    <string name="noInternetConnection">No Internet Connection</string>
-    <string name="showLoactionOnMap">Show My Location</string>
+    <string name="noInternetConnection">لا يوجد اتصال بالانترنت</string>
+    <string name="showLoactionOnMap">موقعي</string>
 
-    <string name="myLocation">My Location</string>
-    <string name="failedToGetLocation">Failed to get location</string>
+    <string name="myLocation">موقعي</string>
+    <string name="failedToGetLocation">فشل في الحصول علي الموقع</string>
     <string name="GPSPermissionNeeded">GPS Permission Needed</string>
     <string name="pleaseEnableGPS">Please enable your GPS</string>
     <string name="ok">OK</string>
@@ -30,6 +28,6 @@
     <string name="com.twitter.sdk.android.CONSUMER_KEY" tools:ignore="ExtraTranslation">lnMZ9aSxiaLAL9q30lTVB8EHK</string>
     <string name="com.twitter.sdk.android.CONSUMER_SECRET" tools:ignore="ExtraTranslation">XOZG1XJsrVbeKpsV6GGXVfDFH8ZMZInbTlbTV9xLpURRja6yB7</string>
     <string name="failedToLoginFacebook">Failed to login by facebook</string>
-    <string name="logout">Logout</string>
-    <string name="changeLang">Change Language</string>
+    <string name="logout">خروج</string>
+    <string name="changeLang">تغير اللغة</string>
 </resources>

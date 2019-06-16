@@ -8,6 +8,14 @@ object Constants {
 
     }
 
+    object Languages {
+        const val LOCALE_ENGLISH = "en"
+        const val LOCALE_ARABIC = "ar"
+        const val APP_LOCALE_KEY = "APP_LOCALE_KEY"
+
+
+    }
+
     object Network {
         const val BASE_URL = BuildConfig.BASE_URL
         const val SOURCE = BuildConfig.SOURCE

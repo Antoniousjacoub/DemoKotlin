@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import com.linkdev.demokotlin.R
+import com.linkdev.demokotlin.common.helpers.LocalizationHelper
 
 abstract class BaseActivity : AppCompatActivity() {
 
@@ -22,6 +23,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        LocalizationHelper.changeAppLanguage(LocalizationHelper.getLanguage(this), this)
         setContentView(layoutViewId())
         initializeViews()
         setListeners()

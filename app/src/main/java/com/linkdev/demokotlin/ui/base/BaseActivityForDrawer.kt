@@ -9,9 +9,11 @@ import com.facebook.login.LoginManager
 import com.linkdev.demokotlin.R
 import com.linkdev.demokotlin.common.helpers.AppPreferences
 import com.linkdev.demokotlin.common.helpers.Constants
+import com.linkdev.demokotlin.common.helpers.LocalizationHelper
 import com.linkdev.demokotlin.common.helpers.UIUtils
 import com.linkdev.demokotlin.models.dto.DrawerItem
 import com.linkdev.demokotlin.ui.location.LocationActivity
+import com.linkdev.demokotlin.ui.news.NewsActivity
 import com.linkdev.demokotlin.ui.splash.SplashActivity
 import kotlinx.android.synthetic.main.activity_base_for_drawer.*
 import kotlinx.android.synthetic.main.layout_nav_header.*
@@ -39,6 +41,10 @@ abstract class BaseActivityForDrawer : BaseActivity(), CustomDrawerAdapter.OnIte
         itemOne.itemName = getString(R.string.showLoactionOnMap)
         itemOne.imgResID = R.drawable.ic_explore
         dataListOFMenuItems.add(itemOne)
+        val changeLang = DrawerItem()
+        changeLang.itemName = getString(R.string.changeLang)
+        changeLang.imgResID = R.drawable.ic_change_langauge
+        dataListOFMenuItems.add(changeLang)
         val itemLoguout = DrawerItem()
         itemLoguout.itemName = getString(R.string.logout)
         itemLoguout.imgResID = R.drawable.ic_logout
@@ -63,6 +69,18 @@ abstract class BaseActivityForDrawer : BaseActivity(), CustomDrawerAdapter.OnIte
             SideMenuItems.OPEN_MAP -> {
                 LocationActivity.startActivity(this)
             }
+            SideMenuItems.CHANGE_LANG -> {
+                if (LocalizationHelper.getLanguage(this)===Constants.Languages.LOCALE_ARABIC) {
+                    AppPreferences.setString(Constants.Languages.APP_LOCALE_KEY, Constants.Languages.LOCALE_ENGLISH, this)
+                } else {
+                    AppPreferences.setString(Constants.Languages.APP_LOCALE_KEY, Constants.Languages.LOCALE_ARABIC, this)
+
+                }
+                LocalizationHelper.changeAppLanguage(LocalizationHelper.getLanguage(this), this)
+                NewsActivity.startActivity(this)
+                finish()
+
+            }
             SideMenuItems.LOGOUT -> {
                 LoginManager.getInstance().logOut()
                 SplashActivity.startActivity(this)
@@ -74,7 +92,9 @@ abstract class BaseActivityForDrawer : BaseActivity(), CustomDrawerAdapter.OnIte
 
     private object SideMenuItems {
         const val OPEN_MAP = 0
-        const val LOGOUT = 1
+        const val CHANGE_LANG = 1
+        const val LOGOUT = 2
+
 
     }
 }
