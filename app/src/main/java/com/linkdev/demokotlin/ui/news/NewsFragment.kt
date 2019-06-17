@@ -43,8 +43,8 @@ class NewsFragment : BaseFragment(), NewsFeedAdapter.OnAdapterNewsInteraction {
     }
 
     override fun setObservers() {
-        newsViewModel?.getSuccessObserver()?.observe(this, newOnSusscesObserver)
-        newsViewModel?.getErrorObserver()?.observe(this, onErroeObserver)
+        newsViewModel?.getSuccessObserver()?.observe(this, newOnSuccessObserver)
+        newsViewModel?.getErrorObserver()?.observe(this, onErrorObserver)
         newsViewModel?.getLoadingObserver()?.observe(this, loadingObserver)
     }
 
@@ -59,6 +59,11 @@ class NewsFragment : BaseFragment(), NewsFeedAdapter.OnAdapterNewsInteraction {
 
     override fun onViewReady(context: Context) {
         mContext = context
+
+    }
+
+    override fun onStart() {
+        super.onStart()
         initViewModel()
         newsViewModel?.onRequestNews()
         setObservers()
@@ -70,11 +75,12 @@ class NewsFragment : BaseFragment(), NewsFeedAdapter.OnAdapterNewsInteraction {
 
     }
 
-    private var newOnSusscesObserver = Observer<List<Article>> {
+    private var newOnSuccessObserver = Observer<List<Article>> {
+        swipe_refresh_layout.isRefreshing = false
         rv_news_feed.layoutManager = LinearLayoutManager(mContext)
         rv_news_feed.adapter = NewsFeedAdapter(it, this)
     }
-    private var onErroeObserver = Observer<Int> {
+    private var onErrorObserver = Observer<Int> {
         if (context != null && it != null && view != null) {
             SnackbarHelper.showErrorMessage(context!!, view!!, it)
         }

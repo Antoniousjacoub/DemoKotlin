@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:paddingStart="@dimen/padding_xxlarge"
+        android:paddingEnd="@dimen/padding_xxlarge"
+        android:layout_height="match_parent">
+
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/kotlin"
+            android:id="@+id/imgLogo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="@dimen/margin_5x_large"
+            app:layout_constraintTop_toTopOf="parent"/>
+    <com.google.android.gms.common.SignInButton
+            android:id="@+id/btnLoginWithGoogle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="@dimen/margin_5x_large"
+            app:layout_constraintTop_toBottomOf="@+id/imgLogo"/>
+
+    <com.facebook.login.widget.LoginButton
+            android:layout_width="0dp"
+            android:id="@+id/btnFacebook"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:paddingStart="@dimen/padding_xSmall"
+            android:paddingEnd="@dimen/padding_xSmall"
+            android:paddingTop="@dimen/padding_large"
+            android:paddingBottom="@dimen/padding_large"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="@dimen/margin_large"
+            app:layout_constraintTop_toBottomOf="@+id/btnLoginWithGoogle"/>
+
+</android.support.constraint.ConstraintLayout>

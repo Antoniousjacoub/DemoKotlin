@@ -58,7 +58,7 @@ object Utils {
         return false
     }
 
-    fun showMessage(context: Context?, content: String?) {
+    private fun showMessage(context: Context?, content: String?) {
         if (context == null || content == null)
             return
         Toast.makeText(context, content, Toast.LENGTH_SHORT).show()

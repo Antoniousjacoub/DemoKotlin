@@ -7,9 +7,7 @@ import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
 import android.util.Log
-
-import java.util.Timer
-import java.util.TimerTask
+import java.util.*
 
 class LocationHelper {
     private var timer1: Timer? = null
@@ -74,7 +72,7 @@ class LocationHelper {
     internal inner class GetLastLocation : TimerTask() {
         @SuppressLint("MissingPermission")
         override fun run() {
-            Log.e("timer","timer running")
+            Log.e("timer", "timer running")
             lm?.removeUpdates(locationListenerGps)
             lm?.removeUpdates(locationListenerNetwork)
 

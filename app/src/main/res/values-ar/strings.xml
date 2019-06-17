@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">لينك</string>
+    <string name="str_welcome">مرحبا</string>
+    <string name="link_development">LINK DEVELOPMENT</string>
+    <string name="by">بواسطة</string>
+
+    <string name="error_communicating_with_server">حدث خطأ من فضلك حاول ثانيا</string>
+    <string name="error_network">خطا فى الشبكة</string>
+    <string name="search">بحث</string>
+    <string name="no_apps_can_resolve_the_intent">لا يوجد تطبيقات لفتح اللينك</string>
+
+    <string name="close">اغلاق</string>
+    <string name="open">افتح</string>
+    <string name="open_website">افتح الموقع</string>
+    <string name="somthing_went_wrong">حدث خطأ</string>
+
+    <string name="noInternetConnection">لا يوجد اتصال بالانترنت</string>
+    <string name="showLoactionOnMap">موقعي</string>
+
+    <string name="myLocation">موقعي</string>
+    <string name="failedToGetLocation">فشل في الحصول علي الموقع</string>
+    <string name="GPSPermissionNeeded">مطلوب إذن GPS</string>
+    <string name="pleaseEnableGPS">يرجى تفعيل GPS الخاص بك</string>
+    <string name="ok">حسنا</string>
+    <string name="newsDetails">تفاصيل الخبر</string>
+    <string name="connect_with_facebook">الاستمرار بالفيسبوك</string>
+    <string name="failedToLoginFacebook">فشل بالاتصال بالفيسبوك</string>
+    <string name="logout">خروج</string>
+    <string name="changeLang">تغير اللغة</string>
+</resources>
