@@ -2,19 +2,15 @@ package com.linkdev.demokotlin.common.helpers
 
 import android.content.Context
 import android.content.ContextWrapper
-import android.content.res.Configuration
-import android.content.res.Resources
 import android.os.Build
 import android.os.LocaleList
-
-import java.util.Locale
+import java.util.*
 
 class LocaleContextWrapper(base: Context) : ContextWrapper(base) {
     companion object {
-
         fun wrap(context: Context, language: String): ContextWrapper {
-            var context = context
-            val res = context.resources
+            var context1 = context
+            val res = context1.resources
             val configuration = res.configuration
             val newLocale = Locale(language)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -22,12 +18,12 @@ class LocaleContextWrapper(base: Context) : ContextWrapper(base) {
                 val localeList = LocaleList(newLocale)
                 LocaleList.setDefault(localeList)
                 configuration.locales = localeList
-                context = context.createConfigurationContext(configuration)
+                context1 = context1.createConfigurationContext(configuration)
             } else {
                 configuration.setLocale(newLocale)
-                context = context.createConfigurationContext(configuration)
+                context1 = context1.createConfigurationContext(configuration)
             }
-            return LocaleContextWrapper(context)
+            return LocaleContextWrapper(context1)
         }
     }
 }

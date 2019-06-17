@@ -41,6 +41,7 @@
 
         <activity
                 android:screenOrientation="portrait"
+                android:launchMode="singleTop"
                 android:name=".ui.location.LocationActivity"
                 android:parentActivityName=".ui.news.NewsActivity">
             <meta-data
@@ -68,6 +69,7 @@
         </activity>
         <activity
                 android:screenOrientation="portrait"
+                android:launchMode="singleTop"
                 android:name=".ui.news.NewsActivity"/>
     </application>
 

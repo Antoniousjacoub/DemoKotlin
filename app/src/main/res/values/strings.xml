@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <string name="app_name">LinkDevTask</string>
     <string name="str_welcome">Welcome</string>
     <string name="link_development">LINK DEVELOPMENT</string>
@@ -7,7 +7,6 @@
     <string name="error_communicating_with_server">Error in communicating with server</string>
     <string name="error_network">Error in network</string>
     <string name="search">Search</string>
-    <string name="no_data_to_show">No data to show</string>
     <string name="no_apps_can_resolve_the_intent">Sorry,No apps can resolve the intent</string>
 
     <string name="close">Close</string>
@@ -15,7 +14,6 @@
     <string name="open_website">OPEN WEBSITE</string>
     <string name="somthing_went_wrong">Something went wrong</string>
 
-    <string name="news">News</string>
     <string name="noInternetConnection">No Internet Connection</string>
     <string name="showLoactionOnMap">Show My Location</string>
 
@@ -26,9 +24,6 @@
     <string name="ok">OK</string>
     <string name="newsDetails">News Details</string>
     <string name="connect_with_facebook">Connect with facebook</string>
-    <string name="failedToSignTwitter">Failed to sing in with twitter</string>
-    <string name="com.twitter.sdk.android.CONSUMER_KEY" tools:ignore="ExtraTranslation">lnMZ9aSxiaLAL9q30lTVB8EHK</string>
-    <string name="com.twitter.sdk.android.CONSUMER_SECRET" tools:ignore="ExtraTranslation">XOZG1XJsrVbeKpsV6GGXVfDFH8ZMZInbTlbTV9xLpURRja6yB7</string>
     <string name="failedToLoginFacebook">Failed to login by facebook</string>
     <string name="logout">Logout</string>
     <string name="changeLang">Change Language</string>

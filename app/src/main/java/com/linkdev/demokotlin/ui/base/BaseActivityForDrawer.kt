@@ -13,7 +13,6 @@ import com.linkdev.demokotlin.common.helpers.LocalizationHelper
 import com.linkdev.demokotlin.common.helpers.UIUtils
 import com.linkdev.demokotlin.models.dto.DrawerItem
 import com.linkdev.demokotlin.ui.location.LocationActivity
-import com.linkdev.demokotlin.ui.news.NewsActivity
 import com.linkdev.demokotlin.ui.splash.SplashActivity
 import kotlinx.android.synthetic.main.activity_base_for_drawer.*
 import kotlinx.android.synthetic.main.layout_nav_header.*
@@ -70,15 +69,24 @@ abstract class BaseActivityForDrawer : BaseActivity(), CustomDrawerAdapter.OnIte
                 LocationActivity.startActivity(this)
             }
             SideMenuItems.CHANGE_LANG -> {
-                if (LocalizationHelper.getLanguage(this)===Constants.Languages.LOCALE_ARABIC) {
-                    AppPreferences.setString(Constants.Languages.APP_LOCALE_KEY, Constants.Languages.LOCALE_ENGLISH, this)
+                if (LocalizationHelper.getLanguage(this) === Constants.Languages.LOCALE_ARABIC) {
+                    AppPreferences.setString(
+                        Constants.Languages.APP_LOCALE_KEY,
+                        Constants.Languages.LOCALE_ENGLISH,
+                        this
+                    )
                 } else {
-                    AppPreferences.setString(Constants.Languages.APP_LOCALE_KEY, Constants.Languages.LOCALE_ARABIC, this)
+                    AppPreferences.setString(
+                        Constants.Languages.APP_LOCALE_KEY,
+                        Constants.Languages.LOCALE_ARABIC,
+                        this
+                    )
 
                 }
                 LocalizationHelper.changeAppLanguage(LocalizationHelper.getLanguage(this), this)
-                NewsActivity.startActivity(this)
                 finish()
+                startActivity(intent)
+
 
             }
             SideMenuItems.LOGOUT -> {

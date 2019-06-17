@@ -1,14 +1,14 @@
 package com.linkdev.demokotlin.common.helpers
 
 import android.content.Context
-import android.content.res.Resources
+import android.content.res.Configuration
+import java.util.*
 
-import java.util.Locale
 
 object LocalizationHelper {
 
 
-    private const val DEFAULT_LOCALE = Constants.Languages.LOCALE_ARABIC
+    private const val DEFAULT_LOCALE = Constants.Languages.LOCALE_ENGLISH
 
     fun changeAppLanguage(languageToLoad: String?, ctx: Context) {
 
@@ -17,10 +17,7 @@ object LocalizationHelper {
                 val res = ctx.applicationContext.resources
                 val config = res.configuration
                 val locale = Locale(languageToLoad)
-                Locale.setDefault(locale)
-                config.setLocale(locale)
-                res.updateConfiguration(config, res.displayMetrics)
-                // save new language to shared preferences
+                updateResources(ctx, config, locale)
                 AppPreferences.setString(Constants.Languages.APP_LOCALE_KEY, languageToLoad, ctx)
             }
 
@@ -28,6 +25,13 @@ object LocalizationHelper {
             e.printStackTrace()
         }
 
+    }
+
+    private fun updateResources(context: Context, configuration: Configuration, locale: Locale) {
+        Locale.setDefault(locale)
+        configuration.setLocale(locale)
+        configuration.setLayoutDirection(locale)
+        context.createConfigurationContext(configuration)
     }
 
 

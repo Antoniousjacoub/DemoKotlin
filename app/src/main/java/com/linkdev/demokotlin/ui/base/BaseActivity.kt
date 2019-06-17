@@ -1,5 +1,6 @@
 package com.linkdev.demokotlin.ui.base
 
+import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.support.annotation.IdRes
@@ -8,7 +9,9 @@ import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import com.linkdev.demokotlin.R
+import com.linkdev.demokotlin.common.helpers.LocaleContextWrapper
 import com.linkdev.demokotlin.common.helpers.LocalizationHelper
+import com.linkdev.demokotlin.common.helpers.LocalizationHelper.getLanguage
 
 abstract class BaseActivity : AppCompatActivity() {
 
@@ -60,4 +63,12 @@ abstract class BaseActivity : AppCompatActivity() {
 
     }
 
+    override fun attachBaseContext(newBase: Context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            val contextWrapper = LocaleContextWrapper.wrap(newBase, getLanguage(newBase)!!)
+            super.attachBaseContext(contextWrapper)
+        } else {
+            super.attachBaseContext(newBase)
+        }
+    }
 }
