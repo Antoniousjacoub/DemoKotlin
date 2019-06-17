@@ -76,6 +76,8 @@ abstract class LoginHandlerFragment : BaseFragment() {
                 }
 
                 override fun onError(error: FacebookException) {
+                    Log.e(TAG, "message>>> " + error.message)
+                    Log.e(TAG, "localizedMessage>>> " + error.localizedMessage)
                     loginViewModel?.onSetError(R.string.failedToLoginFacebook)
 
                 }

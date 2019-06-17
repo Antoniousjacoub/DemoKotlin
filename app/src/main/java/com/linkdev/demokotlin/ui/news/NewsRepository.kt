@@ -13,7 +13,7 @@ import com.linkdev.demokotlin.ui.base.BaseRepository
 class NewsRepository : BaseRepository() {
 
     private val api: RemoteDataSource = RemoteDataSource()
-    suspend fun getNewsList(context: Context): ResultResponse<NewsFeedResponse> {
+     suspend fun getNewsList(context: Context): ResultResponse<NewsFeedResponse> {
         return if (isConnected(context)) {
             api.getNews(Constants.Network.SOURCE, BuildConfig.API_KEY)
         } else {

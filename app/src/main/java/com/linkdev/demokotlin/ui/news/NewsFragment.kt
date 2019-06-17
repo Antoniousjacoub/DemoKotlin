@@ -9,12 +9,13 @@ import com.linkdev.demokotlin.R
 import com.linkdev.demokotlin.common.helpers.SnackbarHelper
 import com.linkdev.demokotlin.models.news.Article
 import com.linkdev.demokotlin.ui.base.BaseFragment
-import com.linkdev.demokotlin.ui.newsDetails.NewsDetailsActivity
 import kotlinx.android.synthetic.main.fragment_main.*
+
 
 class NewsFragment : BaseFragment(), NewsFeedAdapter.OnAdapterNewsInteraction {
     private var newsViewModel: NewsViewModel? = null
     private lateinit var mContext: Context
+    private var onAdapterNewsInteraction: NewsFeedAdapter.OnAdapterNewsInteraction? = null
 
     companion object {
         const val TAG: String = "NewsFragment"
@@ -24,9 +25,10 @@ class NewsFragment : BaseFragment(), NewsFeedAdapter.OnAdapterNewsInteraction {
 
     }
 
-    override fun onItemClicked(article: Article) {
-        if (context != null)
-            NewsDetailsActivity.startActivity(context!!, article)
+
+    override fun onItemClicked(article: Article?) {
+        if (context == null) return
+        onAdapterNewsInteraction?.onItemClicked(article)
     }
 
     override fun initializeViews(v: View) {
@@ -69,6 +71,16 @@ class NewsFragment : BaseFragment(), NewsFeedAdapter.OnAdapterNewsInteraction {
         setObservers()
     }
 
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        try {
+            onAdapterNewsInteraction = context as NewsFeedAdapter.OnAdapterNewsInteraction?
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+    }
+
     private fun initViewModel() {
         val newsViewModelFactory = NewsViewModelFactory(activity!!.application)
         newsViewModel = ViewModelProviders.of(this, newsViewModelFactory).get(NewsViewModel::class.java)
@@ -78,11 +90,11 @@ class NewsFragment : BaseFragment(), NewsFeedAdapter.OnAdapterNewsInteraction {
     private var newOnSuccessObserver = Observer<List<Article>> {
         swipe_refresh_layout.isRefreshing = false
         rv_news_feed.layoutManager = LinearLayoutManager(mContext)
-        rv_news_feed.adapter = NewsFeedAdapter(it, this)
+        rv_news_feed.adapter = NewsFeedAdapter(mContext,it, this)
     }
     private var onErrorObserver = Observer<Int> {
         if (context != null && it != null && view != null) {
-            SnackbarHelper.showErrorMessage(context!!, view!!, it)
+            SnackbarHelper.showErrorMessage(mContext, view!!, it)
         }
     }
     private var loadingObserver = Observer<Boolean> {

@@ -15,6 +15,11 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 object Utils {
+
+    fun isTablet(context: Context): Boolean {
+        return context.resources.getBoolean(R.bool.isTablet)
+    }
+
     fun checkConnection(context: Context): Boolean {
         val connectivityManager = (context
             .getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager)

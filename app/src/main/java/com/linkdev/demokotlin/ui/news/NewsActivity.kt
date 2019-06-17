@@ -4,11 +4,15 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import com.linkdev.demokotlin.R
+import com.linkdev.demokotlin.common.helpers.Utils
+import com.linkdev.demokotlin.models.news.Article
 import com.linkdev.demokotlin.ui.base.BaseActivityForDrawer
+import com.linkdev.demokotlin.ui.newsDetails.NewsDetailsActivity
+import com.linkdev.demokotlin.ui.newsDetails.NewsDetailsFragment
 
-class NewsActivity : BaseActivityForDrawer() {
-
+class NewsActivity : BaseActivityForDrawer(), NewsFeedAdapter.OnAdapterNewsInteraction {
     companion object {
+
         fun startActivity(context: Context) {
             val intent = Intent(context, NewsActivity::class.java)
             context.startActivity(intent)
@@ -28,11 +32,25 @@ class NewsActivity : BaseActivityForDrawer() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        resources.displayMetrics.xdpi
         addFragment(
-            R.id.frmlContainer,
+            R.id.frmlContainerNews,
             NewsFragment.create(),
             NewsFragment.TAG
         )
         setupDrawer()
+    }
+
+    override fun onItemClicked(article: Article?) {
+        if (Utils.isTablet(this)) {
+            replaceFragment(
+                R.id.frmlContainerDetails,
+                NewsDetailsFragment.create(article),
+                NewsDetailsFragment.TAG
+            )
+        } else {
+            if (article != null)
+                NewsDetailsActivity.startActivity(this, article)
+        }
     }
 }
