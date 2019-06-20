@@ -42,6 +42,7 @@ open class BaseViewModel(application: Application?) : AndroidViewModel(applicati
     }
 
     fun getLoadingObserver(): MutableLiveData<Boolean> {
+
         return showLoading
     }
 

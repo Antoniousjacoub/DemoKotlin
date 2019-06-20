@@ -30,7 +30,6 @@ abstract class BaseActivityForDrawer : BaseActivity(), CustomDrawerAdapter.OnIte
     }
 
     protected fun setupDrawer() {
-
         val drawerToggle = ActionBarDrawerToggle(this, drawer_layout, tool_bar, R.string.open, R.string.close)
         drawerToggle.setHomeAsUpIndicator(R.drawable.ic_drawer)
         drawer_layout.addDrawerListener(drawerToggle)
@@ -44,10 +43,10 @@ abstract class BaseActivityForDrawer : BaseActivity(), CustomDrawerAdapter.OnIte
         changeLang.itemName = getString(R.string.changeLang)
         changeLang.imgResID = R.drawable.ic_change_langauge
         dataListOFMenuItems.add(changeLang)
-        val itemLoguout = DrawerItem()
-        itemLoguout.itemName = getString(R.string.logout)
-        itemLoguout.imgResID = R.drawable.ic_logout
-        dataListOFMenuItems.add(itemLoguout)
+        val itemLogout = DrawerItem()
+        itemLogout.itemName = getString(R.string.logout)
+        itemLogout.imgResID = R.drawable.ic_logout
+        dataListOFMenuItems.add(itemLogout)
         val customDrawerAdapter = CustomDrawerAdapter(this, dataListOFMenuItems, this)
         val layoutManager = LinearLayoutManager(this)
         rv_menuList.layoutManager = layoutManager

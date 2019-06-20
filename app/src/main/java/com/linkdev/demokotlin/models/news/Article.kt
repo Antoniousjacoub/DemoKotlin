@@ -4,12 +4,9 @@ import android.os.Parcel
 import android.os.Parcelable
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-
-/**
- * Created by antonio on 1/16/19.
- */
-
 class Article : Parcelable {
+
+
     @SerializedName("author")
     @Expose
     var author: String? = null
@@ -29,13 +26,13 @@ class Article : Parcelable {
     @Expose
     var publishedAt: String? = null
 
-    protected constructor(`in`: Parcel) {
-        this.author = `in`.readValue(String::class.java.classLoader) as String
-        this.title = `in`.readValue(String::class.java.classLoader) as String
-        this.description = `in`.readValue(String::class.java.classLoader) as String
-        this.url = `in`.readValue(String::class.java.classLoader) as String
-        this.urlToImage = `in`.readValue(String::class.java.classLoader) as String
-        this.publishedAt = `in`.readValue(String::class.java.classLoader) as String
+    protected constructor(parcel: Parcel) {
+        this.author = parcel.readValue(String::class.java.classLoader) as String
+        this.title = parcel.readValue(String::class.java.classLoader) as String
+        this.description = parcel.readValue(String::class.java.classLoader) as String
+        this.url = parcel.readValue(String::class.java.classLoader) as String
+        this.urlToImage = parcel.readValue(String::class.java.classLoader) as String
+        this.publishedAt = parcel.readValue(String::class.java.classLoader) as String
     }
 
     constructor() {}

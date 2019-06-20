@@ -7,11 +7,7 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import com.linkdev.demokotlin.models.news.Article
 
-/**
- * Created by antonio on 1/16/19.
- */
-
-class NewsFeedResponse private constructor(`in`: Parcel) : Parcelable {
+class NewsFeedResponse private constructor(parcel: Parcel) : Parcelable {
     @SerializedName("status")
     @Expose
     var status: String? = null
@@ -26,10 +22,10 @@ class NewsFeedResponse private constructor(`in`: Parcel) : Parcelable {
     var articles: List<Article>? = null
 
     init {
-        this.status = `in`.readValue(String::class.java.classLoader) as String
-        this.source = `in`.readValue(String::class.java.classLoader) as String
-        this.sortBy = `in`.readValue(String::class.java.classLoader) as String
-        `in`.readList(this.articles, Article::class.java.classLoader)
+        this.status = parcel.readValue(String::class.java.classLoader) as String
+        this.source = parcel.readValue(String::class.java.classLoader) as String
+        this.sortBy = parcel.readValue(String::class.java.classLoader) as String
+        parcel.readList(this.articles, Article::class.java.classLoader)
     }
 
     override fun writeToParcel(dest: Parcel, flags: Int) {
