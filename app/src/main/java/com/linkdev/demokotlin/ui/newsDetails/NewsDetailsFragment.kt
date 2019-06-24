@@ -72,8 +72,8 @@ class NewsDetailsFragment : BaseFragment() {
             Constants.Date.outputPattern
         )
         UIUtils.loadImageWithPicasso(
-            article?.urlToImage!!, img_news_feed_details, context?.getDrawable(R.drawable.placeholder)!!,
-            context?.getDrawable(R.drawable.placeholder)!!
+            article?.urlToImage, img_news_feed_details, context?.getDrawable(R.drawable.placeholder),
+            context?.getDrawable(R.drawable.placeholder)
         )
     }
 

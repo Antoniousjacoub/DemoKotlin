@@ -53,10 +53,10 @@ abstract class BaseActivityForDrawer : BaseActivity(), CustomDrawerAdapter.OnIte
         rv_menuList.adapter = customDrawerAdapter
         tv_name.text = AppPreferences.getString(Constants.Keys.NAME, this, "")
         UIUtils.loadImageWithPicasso(
-            AppPreferences.getString(Constants.Keys.PHOTO_URL, this, "")!!,
+            AppPreferences.getString(Constants.Keys.PHOTO_URL, this, ""),
             image_header_menu,
-            getDrawable(R.drawable.placeholder)!!,
-            getDrawable(R.drawable.placeholder)!!
+            getDrawable(R.drawable.placeholder),
+            getDrawable(R.drawable.placeholder)
         )
     }
 

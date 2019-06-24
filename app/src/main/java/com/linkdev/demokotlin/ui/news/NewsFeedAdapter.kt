@@ -62,8 +62,8 @@ class NewsFeedAdapter(
             tvNewsFeedTitle.text = article?.title
             tvPublishDate.text = article?.publishedAt
             UIUtils.loadImageWithPicasso(
-                article?.urlToImage!!, imgNewsFeed, context.getDrawable(R.drawable.placeholder)!!,
-                context.getDrawable(R.drawable.placeholder)!!
+                article?.urlToImage, imgNewsFeed, context.getDrawable(R.drawable.placeholder),
+                context.getDrawable(R.drawable.placeholder)
             )
 
             itemView.setOnClickListener { onAdapterNewsInteraction?.onItemClicked(article) }

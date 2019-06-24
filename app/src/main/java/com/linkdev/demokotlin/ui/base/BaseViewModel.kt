@@ -20,7 +20,7 @@ open class BaseViewModel(application: Application?) : AndroidViewModel(applicati
     private val coroutineContext: CoroutineContext
         get() = parentJob + Dispatchers.IO
 
-    protected val scope = CoroutineScope(coroutineContext)
+     val scope = CoroutineScope(coroutineContext)
 
     private fun cancelAllRequests() = coroutineContext.cancel()
 
