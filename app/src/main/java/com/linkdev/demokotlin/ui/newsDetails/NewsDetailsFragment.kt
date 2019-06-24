@@ -24,7 +24,7 @@ class NewsDetailsFragment : BaseFragment() {
         fun create(article: Article?): NewsDetailsFragment {
             val newsDetailsFragment = NewsDetailsFragment()
             val bundle = Bundle()
-            bundle.putParcelable(Constants.Keys.ARTICLE_KEY, article!!)
+            bundle.putSerializable(Constants.Keys.ARTICLE_KEY, article)
             newsDetailsFragment.arguments = bundle
             return newsDetailsFragment
         }

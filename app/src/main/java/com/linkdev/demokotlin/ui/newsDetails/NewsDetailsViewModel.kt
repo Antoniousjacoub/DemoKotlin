@@ -19,7 +19,7 @@ class NewsDetailsViewModel(application: Application?, private val bundle: Bundle
             onSetError(R.string.somthing_went_wrong)
             return
         }
-        article = bundle.getParcelable(ARTICLE_KEY)
+        article = bundle.getSerializable(ARTICLE_KEY) as Article?
         articleMutableLiveData.postValue(article)
 
     }
