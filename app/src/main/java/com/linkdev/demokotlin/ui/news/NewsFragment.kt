@@ -7,15 +7,16 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.linkdev.demokotlin.R
 import com.linkdev.demokotlin.common.helpers.SnackbarHelper
+import com.linkdev.demokotlin.common.interfaces.onNewsInteraction
 import com.linkdev.demokotlin.models.news.Article
 import com.linkdev.demokotlin.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_main.*
 
 
-class NewsFragment : BaseFragment(), NewsFeedAdapter.OnAdapterNewsInteraction {
+class NewsFragment : BaseFragment(), onNewsInteraction {
     private var newsViewModel: NewsViewModel? = null
     private lateinit var mContext: Context
-    private var onAdapterNewsInteraction: NewsFeedAdapter.OnAdapterNewsInteraction? = null
+    private var onNewsInteraction: onNewsInteraction? = null
 
     companion object {
         const val TAG: String = "NewsFragment"
@@ -27,8 +28,7 @@ class NewsFragment : BaseFragment(), NewsFeedAdapter.OnAdapterNewsInteraction {
 
 
     override fun onItemClicked(article: Article?) {
-        if (context == null) return
-        onAdapterNewsInteraction?.onItemClicked(article)
+        onNewsInteraction?.onItemClicked(article)
     }
 
     override fun initializeViews(v: View) {
@@ -41,7 +41,7 @@ class NewsFragment : BaseFragment(), NewsFeedAdapter.OnAdapterNewsInteraction {
 
 
     override fun setListeners() {
-        swipe_refresh_layout.setOnRefreshListener { newsViewModel?.onRequestNews() }
+        swipeRefreshLayout.setOnRefreshListener { newsViewModel?.onRequestNews() }
     }
 
     override fun setObservers() {
@@ -51,21 +51,16 @@ class NewsFragment : BaseFragment(), NewsFeedAdapter.OnAdapterNewsInteraction {
     }
 
     override fun showProgress(shouldShow: Boolean) {
-        swipe_refresh_layout.isRefreshing = false
+        swipeRefreshLayout.isRefreshing = false
         if (shouldShow) {
-            load_view.visibility = View.VISIBLE
+            loadView.visibility = View.VISIBLE
         } else {
-            load_view.visibility = View.GONE
+            loadView.visibility = View.GONE
         }
     }
 
     override fun onViewReady(context: Context) {
         mContext = context
-
-    }
-
-    override fun onStart() {
-        super.onStart()
         initViewModel()
         newsViewModel?.onRequestNews()
         setObservers()
@@ -74,7 +69,7 @@ class NewsFragment : BaseFragment(), NewsFeedAdapter.OnAdapterNewsInteraction {
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         try {
-            onAdapterNewsInteraction = context as NewsFeedAdapter.OnAdapterNewsInteraction?
+            onNewsInteraction = context as onNewsInteraction?
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -88,9 +83,9 @@ class NewsFragment : BaseFragment(), NewsFeedAdapter.OnAdapterNewsInteraction {
     }
 
     private var newOnSuccessObserver = Observer<List<Article>> {
-        swipe_refresh_layout.isRefreshing = false
-        rv_news_feed.layoutManager = LinearLayoutManager(mContext)
-        rv_news_feed.adapter = NewsFeedAdapter(mContext,it, this)
+        swipeRefreshLayout.isRefreshing = false
+        rvNewsFeed.layoutManager = LinearLayoutManager(mContext)
+        rvNewsFeed.adapter = NewsFeedAdapter(mContext, it, this)
     }
     private var onErrorObserver = Observer<Int> {
         if (context != null && it != null && view != null) {

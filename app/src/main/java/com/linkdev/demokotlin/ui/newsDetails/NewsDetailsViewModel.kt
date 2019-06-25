@@ -20,7 +20,12 @@ class NewsDetailsViewModel(application: Application?, private val bundle: Bundle
             return
         }
         article = bundle.getSerializable(ARTICLE_KEY) as Article?
-        articleMutableLiveData.postValue(article)
+        if (article != null) {
+            articleMutableLiveData.postValue(article)
+        } else {
+            onSetError(R.string.somthing_went_wrong)
+
+        }
 
     }
 

@@ -10,7 +10,7 @@ import com.linkdev.demokotlin.R
 import com.linkdev.demokotlin.common.helpers.AppPreferences
 import com.linkdev.demokotlin.common.helpers.Constants
 import com.linkdev.demokotlin.common.helpers.LocalizationHelper
-import com.linkdev.demokotlin.common.helpers.UIUtils
+import com.linkdev.demokotlin.common.helpers.UIUtils.loadImageWithPicasso
 import com.linkdev.demokotlin.models.dto.DrawerItem
 import com.linkdev.demokotlin.ui.location.LocationActivity
 import com.linkdev.demokotlin.ui.splash.SplashActivity
@@ -30,9 +30,9 @@ abstract class BaseActivityForDrawer : BaseActivity(), CustomDrawerAdapter.OnIte
     }
 
     protected fun setupDrawer() {
-        val drawerToggle = ActionBarDrawerToggle(this, drawer_layout, tool_bar, R.string.open, R.string.close)
+        val drawerToggle = ActionBarDrawerToggle(this, drawerLayout, toolBar, R.string.open, R.string.close)
         drawerToggle.setHomeAsUpIndicator(R.drawable.ic_drawer)
-        drawer_layout.addDrawerListener(drawerToggle)
+        drawerLayout.addDrawerListener(drawerToggle)
         drawerToggle.syncState()
         val dataListOFMenuItems = ArrayList<DrawerItem>()
         val itemOne = DrawerItem()
@@ -49,12 +49,12 @@ abstract class BaseActivityForDrawer : BaseActivity(), CustomDrawerAdapter.OnIte
         dataListOFMenuItems.add(itemLogout)
         val customDrawerAdapter = CustomDrawerAdapter(this, dataListOFMenuItems, this)
         val layoutManager = LinearLayoutManager(this)
-        rv_menuList.layoutManager = layoutManager
-        rv_menuList.adapter = customDrawerAdapter
-        tv_name.text = AppPreferences.getString(Constants.Keys.NAME, this, "")
-        UIUtils.loadImageWithPicasso(
+        rvMenuList.layoutManager = layoutManager
+        rvMenuList.adapter = customDrawerAdapter
+        tvName.text = AppPreferences.getString(Constants.Keys.NAME, this, "")
+        loadImageWithPicasso(
             AppPreferences.getString(Constants.Keys.PHOTO_URL, this, ""),
-            image_header_menu,
+            imageHeaderMenu,
             getDrawable(R.drawable.placeholder),
             getDrawable(R.drawable.placeholder)
         )
@@ -62,13 +62,13 @@ abstract class BaseActivityForDrawer : BaseActivity(), CustomDrawerAdapter.OnIte
 
 
     override fun onItemSideMenuClicked(position: Int) {
-        drawer_layout.closeDrawers()
+        drawerLayout.closeDrawers()
         when (position) {
             SideMenuItems.OPEN_MAP -> {
                 LocationActivity.startActivity(this)
             }
             SideMenuItems.CHANGE_LANG -> {
-                if (LocalizationHelper.getLanguage(this) === Constants.Languages.LOCALE_ARABIC) {
+                if (LocalizationHelper.getLanguage(this) == Constants.Languages.LOCALE_ARABIC) {
                     AppPreferences.setString(
                         Constants.Languages.APP_LOCALE_KEY,
                         Constants.Languages.LOCALE_ENGLISH,

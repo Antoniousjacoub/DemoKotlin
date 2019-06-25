@@ -3,12 +3,13 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingTop="@dimen/padding_xlarge">
 
     <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/image_header_menu"
+            android:id="@+id/imageHeaderMenu"
             android:layout_width="@dimen/widthImageHeader"
             android:layout_height="@dimen/heightImageHeader"
             android:layout_marginStart="@dimen/margin_xlarge"
@@ -18,29 +19,29 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/ln_container_message_name"/>
+            app:layout_constraintEnd_toStartOf="@+id/lnContainerMessageName"/>
 
     <LinearLayout
-            android:id="@+id/ln_container_message_name"
+            android:id="@+id/lnContainerMessageName"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_gravity="center"
             android:layout_marginStart="@dimen/margin_xlarge"
             android:layout_marginEnd="@dimen/margin_small"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="@+id/image_header_menu"
-            app:layout_constraintEnd_toStartOf="@+id/imageView"
-            app:layout_constraintStart_toEndOf="@+id/image_header_menu"
-            app:layout_constraintTop_toTopOf="@+id/image_header_menu">
+            app:layout_constraintBottom_toBottomOf="@+id/imageHeaderMenu"
+            app:layout_constraintEnd_toStartOf="@+id/imgArrow"
+            app:layout_constraintStart_toEndOf="@+id/imageHeaderMenu"
+            app:layout_constraintTop_toTopOf="@+id/imageHeaderMenu">
 
         <TextView
-                android:id="@+id/tv_message"
+                android:id="@+id/tvMessage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/str_welcome"/>
 
         <TextView
-                android:id="@+id/tv_name"
+                android:id="@+id/tvName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="Tony "
@@ -52,14 +53,14 @@
     </LinearLayout>
 
     <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/imgArrow"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_gravity="center|end"
             android:layout_marginEnd="@dimen/margin_xlarge"
             android:layout_marginStart="@dimen/margin_xlarge"
             android:src="@drawable/ic_arrow"
-            app:layout_constraintBottom_toBottomOf="@+id/ln_container_message_name"
+            app:layout_constraintBottom_toBottomOf="@+id/lnContainerMessageName"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/ln_container_message_name"/>
+            app:layout_constraintTop_toTopOf="@+id/lnContainerMessageName"/>
 </android.support.constraint.ConstraintLayout>

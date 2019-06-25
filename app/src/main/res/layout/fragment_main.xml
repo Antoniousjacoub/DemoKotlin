@@ -6,7 +6,7 @@
         android:layout_height="match_parent">
 
     <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/swipe_refresh_layout"
+            android:id="@+id/swipeRefreshLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -15,14 +15,14 @@
             app:layout_constraintTop_toTopOf="parent">
 
         <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_news_feed"
+                android:id="@+id/rvNewsFeed"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
     </android.support.v4.widget.SwipeRefreshLayout>
 
     <include
             layout="@layout/layout_loading_view"
-            android:id="@+id/load_view"
+            android:id="@+id/loadView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"

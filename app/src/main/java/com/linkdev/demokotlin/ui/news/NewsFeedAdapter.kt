@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import com.linkdev.demokotlin.R
 import com.linkdev.demokotlin.common.helpers.UIUtils
 import com.linkdev.demokotlin.common.helpers.Utils
+import com.linkdev.demokotlin.common.interfaces.onNewsInteraction
 import com.linkdev.demokotlin.models.news.Article
 import kotlinx.android.synthetic.main.item_news_feed.view.*
 
@@ -18,7 +19,7 @@ import kotlinx.android.synthetic.main.item_news_feed.view.*
 class NewsFeedAdapter(
     private val context: Context,
     private val mData: List<Article>?,
-    private val onAdapterNewsInteraction: OnAdapterNewsInteraction?
+    private val onNewsInteraction: onNewsInteraction?
 ) :
     RecyclerView.Adapter<NewsFeedAdapter.ViewHolder>() {
     private var isAddedFirstTime: Boolean = true
@@ -42,21 +43,18 @@ class NewsFeedAdapter(
         return mData?.size ?: 0
     }
 
-    interface OnAdapterNewsInteraction {
-        fun onItemClicked(article: Article?)
-    }
 
     inner class ViewHolder(view: View) :
         RecyclerView.ViewHolder(view) {
-        private val imgNewsFeed = view.img_news_feed
-        private val tvNewsFeedTitle = view.tv_news_feed_title
-        private val tvAuthor = view.tv_author
-        private val tvPublishDate = view.tv_publish_date
+        private val imgNewsFeed = view.imgNewsFeed
+        private val tvNewsFeedTitle = view.tvNewsFeedTitle
+        private val tvAuthor = view.tvAuthor
+        private val tvPublishDate = view.tvPublishDate
 
         fun bind(article: Article?) {
             if (Utils.isTablet(context) && adapterPosition == 0 && isAddedFirstTime) {
                 isAddedFirstTime = false
-                onAdapterNewsInteraction?.onItemClicked(article)
+                onNewsInteraction?.onItemClicked(article)
             }
             tvAuthor.text = article?.author
             tvNewsFeedTitle.text = article?.title
@@ -66,7 +64,7 @@ class NewsFeedAdapter(
                 context.getDrawable(R.drawable.placeholder)
             )
 
-            itemView.setOnClickListener { onAdapterNewsInteraction?.onItemClicked(article) }
+            itemView.setOnClickListener { onNewsInteraction?.onItemClicked(article) }
 
         }
 

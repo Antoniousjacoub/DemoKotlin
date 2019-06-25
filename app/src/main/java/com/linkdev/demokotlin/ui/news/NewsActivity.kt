@@ -5,12 +5,13 @@ import android.content.Intent
 import android.os.Bundle
 import com.linkdev.demokotlin.R
 import com.linkdev.demokotlin.common.helpers.Utils
+import com.linkdev.demokotlin.common.interfaces.onNewsInteraction
 import com.linkdev.demokotlin.models.news.Article
 import com.linkdev.demokotlin.ui.base.BaseActivityForDrawer
 import com.linkdev.demokotlin.ui.newsDetails.NewsDetailsActivity
 import com.linkdev.demokotlin.ui.newsDetails.NewsDetailsFragment
 
-class NewsActivity : BaseActivityForDrawer(), NewsFeedAdapter.OnAdapterNewsInteraction {
+class NewsActivity : BaseActivityForDrawer(), onNewsInteraction {
     companion object {
 
         fun startActivity(context: Context) {
@@ -32,7 +33,6 @@ class NewsActivity : BaseActivityForDrawer(), NewsFeedAdapter.OnAdapterNewsInter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        resources.displayMetrics.xdpi
         addFragment(
             R.id.frmlContainerNews,
             NewsFragment.create(),

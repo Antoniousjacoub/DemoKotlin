@@ -51,9 +51,9 @@ class CustomDrawerAdapter(
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        private val image_selected_item = view.image_selected_item
-        private val drawer_icon = view.drawer_icon
-        private val drawer_itemName = view.drawer_itemName
+        private val image_selected_item = view.imageSelectedItem
+        private val drawer_icon = view.drawerIcon
+        private val drawer_itemName = view.drawerItemName
 
         fun bind(
             drawerItem: DrawerItem,

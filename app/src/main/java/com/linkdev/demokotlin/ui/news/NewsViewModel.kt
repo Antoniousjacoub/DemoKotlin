@@ -14,6 +14,18 @@ class NewsViewModel(application: Application) : BaseViewModel(application) {
     private var oldArticles: List<Article>? = null
     private val newsLiveData = MutableLiveData<List<Article>>()
 
+    fun getSuccessObserver(): MutableLiveData<List<Article>> {
+        return newsLiveData
+    }
+
+    fun onRequestNews() {
+        if (oldArticles == null) {
+            fetchNews()
+        } else {
+            newsLiveData.postValue(oldArticles)
+        }
+    }
+
     private fun fetchNews() {
         scope.launch {
             onSetLoading(true)
@@ -23,23 +35,12 @@ class NewsViewModel(application: Application) : BaseViewModel(application) {
         }
     }
 
-    fun getSuccessObserver(): MutableLiveData<List<Article>> {
-        return newsLiveData
-    }
-
-    fun onRequestNews() {
-        if (oldArticles === null) {
-            fetchNews()
-        } else {
-            newsLiveData.postValue(oldArticles)
-        }
-    }
-
     private fun onHandleResponse(response: ResultResponse<NewsFeedResponse>) {
         if (validateResponse(response) == SUCCESS) {
             oldArticles = response.data?.articles
             newsLiveData.postValue(response.data?.articles)
         }
     }
+
 
 }

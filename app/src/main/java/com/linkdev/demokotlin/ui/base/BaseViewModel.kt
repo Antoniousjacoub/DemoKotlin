@@ -20,7 +20,7 @@ open class BaseViewModel(application: Application?) : AndroidViewModel(applicati
     private val coroutineContext: CoroutineContext
         get() = parentJob + Dispatchers.IO
 
-     val scope = CoroutineScope(coroutineContext)
+    val scope = CoroutineScope(coroutineContext)
 
     private fun cancelAllRequests() = coroutineContext.cancel()
 
@@ -42,21 +42,20 @@ open class BaseViewModel(application: Application?) : AndroidViewModel(applicati
     }
 
     fun getLoadingObserver(): MutableLiveData<Boolean> {
-
         return showLoading
     }
 
     protected fun <T> validateResponse(response: ResultResponse<T>?): StatusCode {
         return when {
-            response === null -> {
+            response == null -> {
                 onSetError(R.string.somthing_went_wrong)
                 StatusCode.ERROR
             }
-            response.codeStatus === StatusCode.NO_NETWORK -> {
+            response.codeStatus == StatusCode.NO_NETWORK -> {
                 onSetError(R.string.noInternetConnection)
                 StatusCode.NO_NETWORK
             }
-            response.codeStatus === StatusCode.SUCCESS -> StatusCode.SUCCESS
+            response.codeStatus == StatusCode.SUCCESS -> StatusCode.SUCCESS
 
             else -> StatusCode.UNKNOWN
         }

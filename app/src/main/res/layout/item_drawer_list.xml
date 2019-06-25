@@ -9,13 +9,13 @@
 
 
     <ImageView
-            android:id="@+id/image_selected_item"
+            android:id="@+id/imageSelectedItem"
             android:layout_width="@dimen/padding_small"
             android:layout_height="match_parent"
             android:layout_marginEnd="@dimen/margin_xlarge"/>
 
     <ImageView
-            android:id="@+id/drawer_icon"
+            android:id="@+id/drawerIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/margin_large"
@@ -24,7 +24,7 @@
             android:src="@drawable/ic_explore"/>
 
     <TextView
-            android:id="@+id/drawer_itemName"
+            android:id="@+id/drawerItemName"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"

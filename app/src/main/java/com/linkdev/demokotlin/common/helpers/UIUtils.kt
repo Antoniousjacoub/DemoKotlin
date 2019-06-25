@@ -6,7 +6,6 @@ import android.widget.ImageView
 import com.squareup.picasso.Picasso
 
 object UIUtils {
-
     fun loadImageWithPicasso(url: String?, imageView: ImageView?, placeholder: Drawable?, errorPlaceholder: Drawable?) {
         if (url == null || placeholder == null || errorPlaceholder == null) return
         if (!TextUtils.isEmpty(url)) {

@@ -15,7 +15,7 @@
 
     <include
             layout="@layout/layout_loading_view"
-            android:id="@+id/load_view"
+            android:id="@+id/loadView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"/>

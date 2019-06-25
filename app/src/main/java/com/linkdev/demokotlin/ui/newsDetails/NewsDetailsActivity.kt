@@ -35,7 +35,7 @@ class NewsDetailsActivity : BaseActivity() {
         addFragment(
             R.id.frmlContainer,
             NewsDetailsFragment.create(article = intent?.extras?.getSerializable(ARTICLE_KEY) as Article),
-            NewsDetailsFragment.TAG
+            fragmentTag = NewsDetailsFragment.TAG
         )
         setToolbar(toolbar, getString(R.string.newsDetails), true, false)
     }

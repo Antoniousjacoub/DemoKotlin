@@ -29,7 +29,6 @@ class LocationFragment : PermissionHandlerFragment(), OnMapReadyCallback {
     companion object {
         private const val REQUEST_LOCATION_CODE = 101
         const val TAG = "LocationFragment"
-        @JvmStatic
         fun newInstance() = LocationFragment()
     }
 
@@ -64,9 +63,9 @@ class LocationFragment : PermissionHandlerFragment(), OnMapReadyCallback {
 
     override fun showProgress(shouldShow: Boolean) {
         if (shouldShow) {
-            load_view.visibility = View.VISIBLE
+            loadView.visibility = View.VISIBLE
         } else {
-            load_view.visibility = View.GONE
+            loadView.visibility = View.GONE
         }
     }
 

@@ -1,23 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-                                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                                    android:id="@+id/card_view"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="@dimen/margin_medium"
-                                    android:layout_marginTop="@dimen/margin_medium"
-                                    android:layout_marginEnd="@dimen/margin_medium"
-                                    app:cardCornerRadius="@dimen/radius_xSmall"
-                                    app:cardElevation="@dimen/elevation_xSmall">
+<android.support.v7.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/crdvContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_medium"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:layout_marginEnd="@dimen/margin_medium"
+        app:cardCornerRadius="@dimen/radius_xSmall"
+        app:cardElevation="@dimen/elevation_xSmall">
 
-    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                                 xmlns:app="http://schemas.android.com/apk/res-auto"
-                                                 android:layout_width="match_parent"
-                                                 android:layout_height="match_parent"
-                                                 android:background="@color/white">
+    <android.support.constraint.ConstraintLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white">
 
         <ImageView
-                android:id="@+id/img_news_feed"
+                android:id="@+id/imgNewsFeed"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
@@ -28,23 +30,22 @@
                 app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
-                android:id="@+id/tv_news_feed_title"
+                android:id="@+id/tvNewsFeedTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_medium"
                 android:layout_marginTop="@dimen/margin_small"
                 android:layout_marginEnd="@dimen/margin_medium"
                 android:lines="@integer/two_line"
-                android:text="@{artical.title}"
                 android:textColor="@color/black_opacity_80"
                 android:textSize="@dimen/text_size_medium"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/img_news_feed"/>
+                app:layout_constraintTop_toBottomOf="@+id/imgNewsFeed"/>
 
 
         <LinearLayout
-                android:id="@+id/ln_container_author"
+                android:id="@+id/lnContainerAuthor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_medium"
@@ -53,10 +54,9 @@
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_news_feed_title">
+                app:layout_constraintTop_toBottomOf="@+id/tvNewsFeedTitle">
 
             <TextView
-
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:lines="@integer/one_line"
@@ -64,17 +64,16 @@
                     android:textSize="@dimen/text_size_small"/>
 
             <TextView
-                    android:id="@+id/tv_author"
+                    android:id="@+id/tvAuthor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_small"
                     android:lines="@integer/one_line"
-                    android:text="@{artical.author}"
                     android:textSize="@dimen/text_size_small"/>
         </LinearLayout>
 
         <TextView
-                android:id="@+id/tv_publish_date"
+                android:id="@+id/tvPublishDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_medium"
@@ -86,7 +85,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ln_container_author"/>
+                app:layout_constraintTop_toBottomOf="@+id/lnContainerAuthor"/>
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>
 
