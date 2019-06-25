@@ -31,7 +31,7 @@ class CustomDrawerAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val dItem = drawerItemList[position]
-        holder.bind(dItem, lastSelectedSideMenuPosition, onItemSideMenuClicked)
+        holder.bind(dItem)
 
 
     }
@@ -49,26 +49,23 @@ class CustomDrawerAdapter(
         fun onItemSideMenuClicked(position: Int)
     }
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        private val image_selected_item = view.imageSelectedItem
-        private val drawer_icon = view.drawerIcon
-        private val drawer_itemName = view.drawerItemName
+        private val imageSelectedItem = view.imageSelectedItem
+        private val drawerIcon = view.drawerIcon
+        private val drawerItemName = view.drawerItemName
 
-        fun bind(
-            drawerItem: DrawerItem,
-            lastPosition: Int,
-            onItemSideMenuClicked: OnItemSideMenuClicked
-        ) {
-            drawer_itemName.text = drawerItem.itemName
-            drawer_icon.setImageDrawable(ContextCompat.getDrawable(itemView.context, drawerItem.imgResID))
+        fun bind(drawerItem: DrawerItem) {
+            drawerItemName.text = drawerItem.itemName
+            drawerIcon.setImageDrawable(ContextCompat.getDrawable(itemView.context, drawerItem.imgResID))
             itemView.setOnClickListener {
+                lastSelectedSideMenuPosition = adapterPosition
                 onItemSideMenuClicked.onItemSideMenuClicked(adapterPosition)
             }
-            if (adapterPosition == lastPosition) {
-                image_selected_item.setImageDrawable(ContextCompat.getDrawable(itemView.context, R.drawable.selected))
+            if (adapterPosition == lastSelectedSideMenuPosition) {
+                imageSelectedItem.setImageDrawable(ContextCompat.getDrawable(itemView.context, R.drawable.selected))
             } else {
-                image_selected_item.setImageDrawable(null)
+                imageSelectedItem.setImageDrawable(null)
             }
         }
     }
