@@ -1,4 +1,4 @@
-package com.linkdev.demokotlin.models
+package com.linkdev.demokotlin.models.network
 
 enum class StatusCode {
     SUCCESS,

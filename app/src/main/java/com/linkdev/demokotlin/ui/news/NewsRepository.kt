@@ -4,8 +4,8 @@ import android.content.Context
 import com.linkdev.demokotlin.BuildConfig
 import com.linkdev.demokotlin.R
 import com.linkdev.demokotlin.common.helpers.Constants
-import com.linkdev.demokotlin.models.ResultResponse
-import com.linkdev.demokotlin.models.StatusCode
+import com.linkdev.demokotlin.models.network.ResultResponse
+import com.linkdev.demokotlin.models.network.StatusCode
 import com.linkdev.demokotlin.models.dto.NewsFeedResponse
 import com.linkdev.demokotlin.models.remote.RemoteDataSource
 import com.linkdev.demokotlin.ui.base.BaseRepository

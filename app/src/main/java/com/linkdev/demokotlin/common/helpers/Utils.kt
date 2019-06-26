@@ -1,18 +1,22 @@
 package com.linkdev.demokotlin.common.helpers
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
+import android.content.IntentSender
 import android.location.LocationManager
 import android.net.ConnectivityManager
 import android.net.Uri
-import android.provider.Settings
-import android.support.v7.app.AlertDialog
 import android.widget.Toast
+import com.google.android.gms.common.api.ResolvableApiException
+import com.google.android.gms.location.*
+import com.google.android.gms.tasks.Task
 import com.linkdev.demokotlin.R
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 object Utils {
 
@@ -43,23 +47,41 @@ object Utils {
 
     }
 
-    fun checkEnableGPS(context: Context?): Boolean {
+    private fun createLocationRequest(): LocationRequest? {
+        return LocationRequest.create()?.apply {
+            interval = 10000
+            fastestInterval = 5000
+            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        }
+    }
+
+    fun checkEnableGPS(context: Activity?, code: Int): Boolean {
         if (context == null) return false
         val lm = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         if (lm.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             return true
         }
-        AlertDialog.Builder(context)
-            .setTitle(context.getString(R.string.GPSPermissionNeeded))
-            .setMessage(context.getString(R.string.pleaseEnableGPS))
-            .setPositiveButton(context.getString(R.string.ok)) { _, _ ->
-                val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
-                context.startActivity(intent)
+        val builder = LocationSettingsRequest.Builder()
+            .addLocationRequest(createLocationRequest()!!)
+        val client: SettingsClient = LocationServices.getSettingsClient(context)
+        val task: Task<LocationSettingsResponse> = client.checkLocationSettings(builder.build())
+        task.addOnFailureListener { exception ->
+            if (exception is ResolvableApiException) {
+                // Location settings are not satisfied, but this can be fixed
+                // by showing the user a dialog.
+                try {
+                    // Show the dialog by calling startResolutionForResult(),
+                    // and check the result in onActivityResult().
+                    exception.startResolutionForResult(
+                        context,
+                        code
+                    )
+                } catch (sendEx: IntentSender.SendIntentException) {
+                    // Ignore the error.
+                    sendEx.printStackTrace()
+                }
             }
-            .setCancelable(false)
-            .create()
-            .show()
-
+        }
         return false
     }
 

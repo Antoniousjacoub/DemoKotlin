@@ -6,19 +6,15 @@ import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
-import android.util.Log
-import java.util.*
 
 class LocationHelper {
-    private var timer1: Timer? = null
     private var lm: LocationManager? = null
     private var myLocationResult: MyLocationResult? = null
-    private var gps_enabled = false
-    private var network_enabled = false
+    private var GPSEnabled: Boolean? = false
+    private var networkEnabled: Boolean? = false
 
     private val locationListenerGps = object : LocationListener {
         override fun onLocationChanged(location: Location) {
-            timer1?.cancel()
             myLocationResult?.gotLocation(location)
             lm?.removeUpdates(this)
         }
@@ -32,7 +28,6 @@ class LocationHelper {
 
     private val locationListenerNetwork = object : LocationListener {
         override fun onLocationChanged(location: Location) {
-            timer1?.cancel()
             myLocationResult?.gotLocation(location)
             lm?.removeUpdates(this)
             lm?.removeUpdates(locationListenerGps)
@@ -48,61 +43,20 @@ class LocationHelper {
     @SuppressLint("MissingPermission")
     fun getLocation(context: Context, result: MyLocationResult): Boolean {
         myLocationResult = result
-        if (lm == null)
-            lm = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        lm = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        GPSEnabled = lm?.isProviderEnabled(LocationManager.GPS_PROVIDER)
+        networkEnabled = lm?.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
 
-        if (lm != null)
-            gps_enabled = lm!!.isProviderEnabled(LocationManager.GPS_PROVIDER)
-
-        if (lm != null)
-            network_enabled = lm!!.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
-
-        if (!gps_enabled && !network_enabled)
+        if (!GPSEnabled!! && !networkEnabled!!)
             return false
 
-        if (gps_enabled && lm != null)
+        if (GPSEnabled!!)
             lm?.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0f, locationListenerGps)
-        if (network_enabled && lm != null)
+        if (networkEnabled!!)
             lm?.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0f, locationListenerNetwork)
-        timer1 = Timer()
-        timer1?.schedule(GetLastLocation(), 20000)
         return true
     }
 
-    internal inner class GetLastLocation : TimerTask() {
-        @SuppressLint("MissingPermission")
-        override fun run() {
-            Log.e("timer", "timer running")
-            lm?.removeUpdates(locationListenerGps)
-            lm?.removeUpdates(locationListenerNetwork)
-
-            var net_loc: Location? = null
-            var gps_loc: Location? = null
-            if (gps_enabled)
-                gps_loc = lm!!.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-            if (network_enabled)
-                net_loc = lm!!.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
-
-            //if there are both values use the latest one
-            if (gps_loc != null && net_loc != null) {
-                if (gps_loc.time > net_loc.time)
-                    myLocationResult?.gotLocation(gps_loc)
-                else
-                    myLocationResult?.gotLocation(net_loc)
-                return
-            }
-
-            if (gps_loc != null) {
-                myLocationResult?.gotLocation(gps_loc)
-                return
-            }
-            if (net_loc != null) {
-                myLocationResult?.gotLocation(net_loc)
-                return
-            }
-            myLocationResult!!.gotLocation(null)
-        }
-    }
 
     abstract class MyLocationResult {
         internal abstract fun gotLocation(location: Location?)

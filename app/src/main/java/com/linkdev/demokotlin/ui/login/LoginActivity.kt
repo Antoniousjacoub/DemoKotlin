@@ -22,7 +22,7 @@ class LoginActivity : BaseActivity() {
         addFragment(
             R.id.frmlContainer,
             LoginFragment.create(),
-            LoginHandlerFragment.TAG
+            LoginFragment.TAG
         )
     }
 

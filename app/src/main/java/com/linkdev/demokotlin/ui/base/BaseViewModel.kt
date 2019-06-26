@@ -4,8 +4,8 @@ import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.MutableLiveData
 import com.linkdev.demokotlin.R
-import com.linkdev.demokotlin.models.ResultResponse
-import com.linkdev.demokotlin.models.StatusCode
+import com.linkdev.demokotlin.models.network.ResultResponse
+import com.linkdev.demokotlin.models.network.StatusCode
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 

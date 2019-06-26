@@ -28,6 +28,7 @@ class LocationFragment : PermissionHandlerFragment(), OnMapReadyCallback {
 
     companion object {
         private const val REQUEST_LOCATION_CODE = 101
+        private const val REQUEST_CHECK_SETTINGS = 101
         const val TAG = "LocationFragment"
         fun newInstance() = LocationFragment()
     }
@@ -74,16 +75,14 @@ class LocationFragment : PermissionHandlerFragment(), OnMapReadyCallback {
 
     override fun onResume() {
         super.onResume()
-        if (checkEnableGPS(context))
+        if (checkEnableGPS(activity,REQUEST_CHECK_SETTINGS))
             checkPermissions(context, REQUEST_LOCATION_CODE, *permissionsLocation)
     }
 
     @SuppressLint("MissingPermission")
     override fun onPermissionGranted(codePermission: Int) {
         if (codePermission == REQUEST_LOCATION_CODE) {
-
             locationViewModel?.requestMyLocation()
-
         }
     }
 

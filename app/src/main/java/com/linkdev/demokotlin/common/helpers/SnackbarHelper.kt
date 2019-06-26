@@ -7,7 +7,8 @@ import android.view.View
 import com.linkdev.demokotlin.R
 
 object SnackbarHelper {
-    fun showErrorMessage(context: Context, view: View, message: Int) {
+    fun showErrorMessage(context: Context?, view: View?, message: Int?) {
+        if (context == null || view == null || message == null) return
         val snackbar = Snackbar.make(view, context.getString(message), Snackbar.LENGTH_LONG)
         val sbView = snackbar.view
         sbView.setBackgroundColor(ContextCompat.getColor(context, R.color.colorError))
