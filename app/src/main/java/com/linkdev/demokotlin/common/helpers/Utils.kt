@@ -65,14 +65,14 @@ object Utils {
             .addLocationRequest(createLocationRequest()!!)
         val client: SettingsClient = LocationServices.getSettingsClient(context)
         val task: Task<LocationSettingsResponse> = client.checkLocationSettings(builder.build())
-        task.addOnFailureListener { exception ->
-            if (exception is ResolvableApiException) {
+        task.addOnFailureListener { it ->
+            if (it is ResolvableApiException) {
                 // Location settings are not satisfied, but this can be fixed
                 // by showing the user a dialog.
                 try {
                     // Show the dialog by calling startResolutionForResult(),
                     // and check the result in onActivityResult().
-                    exception.startResolutionForResult(
+                    it.startResolutionForResult(
                         context,
                         code
                     )

@@ -1,8 +1,8 @@
 package com.linkdev.demokotlin.ui.location
 
 import android.app.Application
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 
 @Suppress("UNCHECKED_CAST")
 class LocationViewModelFactory(private val application: Application) :

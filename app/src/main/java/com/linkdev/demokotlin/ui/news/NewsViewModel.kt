@@ -1,13 +1,14 @@
 package com.linkdev.demokotlin.ui.news
 
 import android.app.Application
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.MutableLiveData
+import com.linkdev.demokotlin.models.dto.NewsFeedResponse
 import com.linkdev.demokotlin.models.network.ResultResponse
 import com.linkdev.demokotlin.models.network.StatusCode.SUCCESS
-import com.linkdev.demokotlin.models.dto.NewsFeedResponse
 import com.linkdev.demokotlin.models.news.Article
 import com.linkdev.demokotlin.ui.base.BaseViewModel
-import kotlinx.coroutines.launch
+import io.reactivex.android.schedulers.AndroidSchedulers.mainThread
+import io.reactivex.schedulers.Schedulers.io
 
 class NewsViewModel(application: Application) : BaseViewModel(application) {
     private val repository: NewsRepository = NewsRepository()
@@ -27,12 +28,14 @@ class NewsViewModel(application: Application) : BaseViewModel(application) {
     }
 
     private fun fetchNews() {
-        scope.launch {
-            onSetLoading(true)
-            val response = repository.getNewsList(getApplication())
-            onSetLoading(false)
-            onHandleResponse(response)
-        }
+        onSetLoading(true)
+        add(repository.getNewsList(getApplication())
+            .subscribeOn(io())
+            .observeOn(mainThread())
+            .doOnSuccess { onSetLoading(false) }
+            .doOnError { onSetLoading(false) }
+            .subscribe { resultResponse -> onHandleResponse(resultResponse) }
+        )
     }
 
     private fun onHandleResponse(response: ResultResponse<NewsFeedResponse>) {

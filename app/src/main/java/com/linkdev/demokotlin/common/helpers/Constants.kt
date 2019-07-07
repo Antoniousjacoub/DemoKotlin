@@ -19,6 +19,7 @@ object Constants {
     object Network {
         const val BASE_URL = BuildConfig.BASE_URL
         const val SOURCE = BuildConfig.SOURCE
+       const val API_KEY: String = BuildConfig.API_KEY
     }
 
     object Keys {

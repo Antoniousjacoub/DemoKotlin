@@ -2,7 +2,7 @@ package com.linkdev.demokotlin.ui.base
 
 import android.content.Context
 import android.content.pm.PackageManager
-import android.support.v4.app.ActivityCompat
+import androidx.core.app.ActivityCompat
 
 abstract class PermissionHandlerFragment : BaseFragment() {
 

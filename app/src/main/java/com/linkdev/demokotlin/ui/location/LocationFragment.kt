@@ -1,8 +1,8 @@
 package com.linkdev.demokotlin.ui.location
 
 import android.annotation.SuppressLint
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import android.content.Context
 import android.location.Location
 import android.util.Log

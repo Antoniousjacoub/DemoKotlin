@@ -1,9 +1,9 @@
 package com.linkdev.demokotlin.ui.news
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import android.content.Context
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.View
 import com.linkdev.demokotlin.R
 import com.linkdev.demokotlin.common.helpers.SnackbarHelper

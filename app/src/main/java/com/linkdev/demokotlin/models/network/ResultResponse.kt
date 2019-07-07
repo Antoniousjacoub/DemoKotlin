@@ -3,7 +3,7 @@ package com.linkdev.demokotlin.models.network
 import com.linkdev.demokotlin.R
 
 
-sealed class ResultResponse<T>(
+open class ResultResponse<T>(
     val data: T? = null,
     val codeStatus: StatusCode? = StatusCode.UNKNOWN,
     val message: Int? = R.string.somthing_went_wrong

@@ -1,7 +1,7 @@
 package com.linkdev.demokotlin.ui.login
 
 import android.app.Application
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.MutableLiveData
 import android.os.Bundle
 import android.util.Log
 import com.facebook.AccessToken

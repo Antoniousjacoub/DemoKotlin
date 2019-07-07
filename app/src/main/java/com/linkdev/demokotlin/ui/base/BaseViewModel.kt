@@ -1,32 +1,36 @@
 package com.linkdev.demokotlin.ui.base
 
 import android.app.Application
-import android.arch.lifecycle.AndroidViewModel
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.MutableLiveData
 import com.linkdev.demokotlin.R
 import com.linkdev.demokotlin.models.network.ResultResponse
 import com.linkdev.demokotlin.models.network.StatusCode
-import kotlinx.coroutines.*
-import kotlin.coroutines.CoroutineContext
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
 
 open class BaseViewModel(application: Application?) : AndroidViewModel(application!!) {
 
+    private var compositeDisposable: CompositeDisposable? = null
 
     private val onErrorAction: MutableLiveData<Int> = MutableLiveData()
     private var showLoading: MutableLiveData<Boolean> = MutableLiveData()
 
-    private val parentJob = Job()
+    protected fun <T> validateResponse(response: ResultResponse<T>?): StatusCode {
+        return when {
+            response == null -> {
+                onSetError(R.string.somthing_went_wrong)
+                StatusCode.ERROR
+            }
+            response.codeStatus == StatusCode.NO_NETWORK -> {
+                onSetError(R.string.noInternetConnection)
+                StatusCode.NO_NETWORK
+            }
+            response.codeStatus == StatusCode.SUCCESS -> StatusCode.SUCCESS
 
-    private val coroutineContext: CoroutineContext
-        get() = parentJob + Dispatchers.IO
+            else -> StatusCode.UNKNOWN
+        }
 
-    val scope = CoroutineScope(coroutineContext)
-
-    private fun cancelAllRequests() = coroutineContext.cancel()
-
-    override fun onCleared() {
-        super.onCleared()
-        cancelAllRequests()
     }
 
     fun onSetError(int: Int) {
@@ -45,20 +49,20 @@ open class BaseViewModel(application: Application?) : AndroidViewModel(applicati
         return showLoading
     }
 
-    protected fun <T> validateResponse(response: ResultResponse<T>?): StatusCode {
-        return when {
-            response == null -> {
-                onSetError(R.string.somthing_went_wrong)
-                StatusCode.ERROR
-            }
-            response.codeStatus == StatusCode.NO_NETWORK -> {
-                onSetError(R.string.noInternetConnection)
-                StatusCode.NO_NETWORK
-            }
-            response.codeStatus == StatusCode.SUCCESS -> StatusCode.SUCCESS
-
-            else -> StatusCode.UNKNOWN
+    fun add(disposable: Disposable) {
+        if (compositeDisposable == null) {
+            compositeDisposable = CompositeDisposable()
         }
+        compositeDisposable?.add(disposable)
+    }
 
+    override fun onCleared() {
+        dispose()
+        super.onCleared()
+    }
+
+    private fun dispose() {
+        compositeDisposable?.dispose()
+        compositeDisposable = null
     }
 }

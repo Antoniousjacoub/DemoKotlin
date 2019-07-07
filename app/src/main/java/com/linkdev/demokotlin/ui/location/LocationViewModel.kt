@@ -1,7 +1,7 @@
 package com.linkdev.demokotlin.ui.location
 
 import android.app.Application
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.MutableLiveData
 import android.location.Location
 import com.linkdev.demokotlin.R
 import com.linkdev.demokotlin.common.helpers.LocationHelper
