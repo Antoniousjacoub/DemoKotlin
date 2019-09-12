@@ -16,7 +16,6 @@ import com.linkdev.demokotlin.common.helpers.LocalizationHelper.getLanguage
 abstract class BaseActivity : AppCompatActivity() {
 
     private var myToolbar: Toolbar? = null
-
     @LayoutRes
     protected abstract fun layoutViewId(): Int
 

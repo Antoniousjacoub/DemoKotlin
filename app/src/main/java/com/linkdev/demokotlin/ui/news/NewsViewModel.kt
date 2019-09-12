@@ -8,7 +8,7 @@ import com.linkdev.demokotlin.models.network.StatusCode.SUCCESS
 import com.linkdev.demokotlin.models.news.Article
 import com.linkdev.demokotlin.ui.base.BaseViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers.mainThread
-import io.reactivex.schedulers.Schedulers.io
+import io.reactivex.schedulers.Schedulers
 
 class NewsViewModel(application: Application) : BaseViewModel(application) {
     private val repository: NewsRepository = NewsRepository()
@@ -30,7 +30,7 @@ class NewsViewModel(application: Application) : BaseViewModel(application) {
     private fun fetchNews() {
         onSetLoading(true)
         add(repository.getNewsList(getApplication())
-            .subscribeOn(io())
+            .subscribeOn(Schedulers.io())
             .observeOn(mainThread())
             .doOnSuccess { onSetLoading(false) }
             .doOnError { onSetLoading(false) }
