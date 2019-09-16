@@ -1,34 +1,35 @@
-package com.linkdev.demokotlin.common.helpers
+package com.linkdev.demokotlin.common.problemSoloving
 
 
 fun hourglassSum(arr: Array<Array<Int>>): Int {
 
     var resultSum = 0
     val resultArray: MutableList<Int> = mutableListOf()
-    var currentColooum = 0
+    var currentColumn = 0
 
 
-    while (currentColooum <= arr.size - 3) {
+    while (currentColumn <= arr.size - 3) {
 
         arr.forEachIndexed { row, ints ->
-            if (row >= arr.size - 3) {
+            if (row > arr.size - 3) {
+                resultSum = 0
                 return@forEachIndexed
             }
+            resultSum += arr[row + 1][currentColumn + 1]
             for (i in 0..2) {
-                resultSum += arr[currentColooum][i]
+                resultSum += arr[row ][i+currentColumn]
             }
 
-            resultSum += arr[row + 1][currentColooum + 1]
 
             for (j in 0..2) {
-                resultSum += arr[row + 2][j]
+                resultSum += arr[row + 2][currentColumn+j]
             }
 
             resultArray.add(resultSum)
             resultSum = 0
 
         }
-        currentColooum++
+        currentColumn++
     }
 
     val sortAsc = resultArray.sortedDescending()
