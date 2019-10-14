@@ -12,6 +12,7 @@ import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.common.SignInButton
 import com.linkdev.demokotlin.R
+import com.linkdev.demokotlin.bottomSheetDemo.BottomSheetManager
 import com.linkdev.demokotlin.common.helpers.AppPreferences
 import com.linkdev.demokotlin.common.helpers.Constants
 import com.linkdev.demokotlin.common.helpers.SnackbarHelper
@@ -43,8 +44,10 @@ class LoginFragment : BaseFragment(), View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
+        var array:Array<String> = arrayOf("Toni","Test Test ","Teahgvjh askjdhjk")
         when (v?.id) {
-            R.id.btnLoginWithGoogle -> signInWithGoogle()
+
+            R.id.btnLoginWithGoogle -> BottomSheetManager(context!!).showBottomSheet(array)
         }
     }
 

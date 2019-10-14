@@ -12,4 +12,5 @@
     <color name="colorError">#E91E63</color>
     <color name="colorSuccess">#00574B</color>
     <color name="colorWarning">#CFBF2B</color>
+    <color name="darkYellow">#B88A16</color>
 </resources>

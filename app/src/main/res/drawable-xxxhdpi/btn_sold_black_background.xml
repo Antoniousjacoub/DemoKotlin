@@ -1,4 +1,5 @@
-<selector xmlns:android="http://schemas.android.com/apk/res/android" >
+<selector
+        xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item android:state_pressed="true" >
         <shape android:shape="rectangle"  >
@@ -19,7 +20,7 @@
     <item >
         <shape android:shape="rectangle"  >
             <corners android:radius="@dimen/radius_xSmall" />
-            <solid android:color="@color/black"/>
+            <solid android:color="@color/darkYellow"/>
         </shape>
     </item>
 

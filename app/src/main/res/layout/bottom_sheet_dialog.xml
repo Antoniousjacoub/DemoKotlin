@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/bg_bottom_sheet"
+        android:padding="@dimen/padding_large">
+
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="@dimen/margin_medium"
+            android:drawableEnd="@drawable/ic_close"
+            android:paddingStart="@dimen/padding_medium"
+            android:paddingEnd="@dimen/padding_medium"
+            android:text="Share File"
+            android:textColor="@color/bubbles_blue"
+            android:textSize="16sp" />
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/tw__light_gray" />
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvFilterItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+</LinearLayout>
